@@ -1,0 +1,15 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.main-content {
+  margin-left: 250px; /* Pushes content away from sidebar */
+  margin-top: 90px; /* Pushes content down below navbar */
+  flex-grow: 1;
+}
+
+
+
