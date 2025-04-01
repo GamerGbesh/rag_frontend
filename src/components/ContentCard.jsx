@@ -1,6 +1,6 @@
 import "../css/coursecard.css"
 
-function CourseCard({course}) {
+function ContentCard({course}) {
     return (
         <div className="course-card">
             <div className="course-name">
@@ -11,4 +11,4 @@ function CourseCard({course}) {
     )
 }
 
-export default CourseCard;
+export default ContentCard;
