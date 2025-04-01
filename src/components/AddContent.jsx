@@ -48,7 +48,16 @@ export function AddContent({course_id, library_id, activeFunction}) {
                 <h2>Upload Document</h2>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <span>Accepted: docx, pdf, pptx, txt, jpeg, jpg, png</span>
-                <input type="file" placeholder={"Upload your document here"} required onChange={handleChange}/>
+                <div style={{
+                    border: "1px solid grey",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    paddingTop: "10px",
+                    paddingBottom: "10px",
+
+                }}>
+                    <input type="file" required onChange={handleChange} style={{ width: "100%" }} />
+                </div>
                 {!loading ? <button type={"submit"} className={"submit"} >Submit</button> : <p>Uploading document....</p>}
             </form>
         </>

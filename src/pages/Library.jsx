@@ -100,6 +100,16 @@ function Library() {
         return <FirstPage />
     }
 
+    if (courseId === -1) {
+        return (
+            <div className="Instructions">
+                <SideBar data={data} activeFunction={activeFunction} headerFunction={headerFunction} addFunction={addFunction}/>
+                Select a course from the side-bar to view its content.<br/>
+                Create a course using the + button if you have no course.<br/>
+                The AI would be enabled once documents have been uploaded to the course.
+            </div>
+        )
+    }
 
     return (
         <>
@@ -115,9 +125,14 @@ function Library() {
                     :(
                         <AddContent course_id={courseId} library_id={id} activeFunction={activeFunction}/>
                     )}
-                    {courseId !== -1 && data?.active &&
+                    {data?.active &&
                         <button  className={"submit"}
                                  onClick={handleClick}
+                                 style={{
+                                     width: "30%",
+                                     position: "relative",
+                                     left: "35%",
+                                 }}
                         >
                             {content ? "X" : "Add Document"}
                         </button>}
@@ -125,7 +140,7 @@ function Library() {
                 )
             }
 
-            {courseId !== -1 && courseData.length >= 1 ? <div style={{ width: '300px' }}>
+            {courseData.length >= 1 ? <div style={{ width: '300px' }}>
                 <AutoResizingTextarea
                     placeholder="Type your message..."
                     minRows={1}
