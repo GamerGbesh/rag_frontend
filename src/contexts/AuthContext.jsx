@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [status, setStatus] = useState(true);
     const [addLibrary, setAddLibrary] = useState(false);
+    const [content, setContent] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("access_token");
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{user, login, logout, status, setStatus, addLibrary, setAddLibrary}}>
+        <AuthContext.Provider value={{user, login, logout, status, setStatus, addLibrary, setAddLibrary, content, setContent}}>
             {children}
         </AuthContext.Provider>
     )

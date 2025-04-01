@@ -8,6 +8,8 @@ function AddCourse({id}) {
     const [course, setCourse] = useState(null);
     const [description, setDescription] = useState(null);
     const {setStatus, status} = useAuthContext()
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 

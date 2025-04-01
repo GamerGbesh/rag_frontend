@@ -1,0 +1,33 @@
+.content-area {
+    width: 66%; /* Two-thirds width */
+    max-width: 800px;
+    flex-grow: 1;
+    overflow-y: auto; /* Enables scrolling */
+    padding-bottom: 10%; /* Prevents content from touching input */
+    height: 100%; /* Takes full height */
+}
+
+/* Fixed input box */
+.input-box {
+    position: absolute;
+    bottom: 15%; /* 1cm above bottom */
+    width: 66%;
+    height: 10%;
+    max-width: 800px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.input-box textarea {
+    width: 94%;
+    position:relative;
+
+    left: 20px;
+    padding-bottom: 30px;
+    font-size: 1rem;
+    border: 1px solid #fff;
+    border-radius: 4px;
+}

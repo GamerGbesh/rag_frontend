@@ -1,4 +1,4 @@
-.course-card {
+.content-card {
     background: var(--light-color);
     padding: 1.25rem;
     margin: 0.75rem 0;
@@ -8,20 +8,27 @@
     border-left: 4px solid var(--primary-color);
 }
 
-.course-card:hover {
+.content-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.course-name {
+.content-name {
     font-size: 1.125rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--secondary-color);
 }
 
-.course-description {
+.content-card .content-description {
     color: #666;
     font-size: 0.9rem;
     line-height: 1.5;
+    position : absolute;
+    left: 95%;
+    visibility: hidden;
+}
+
+.content-card:hover .content-description {
+    visibility: visible;
 }
