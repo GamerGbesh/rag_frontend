@@ -2,36 +2,46 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #fff;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: var(--light-color);
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    width: 180px;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
 }
 
 .member-pic img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    border: 2px solid #4A90E2;
+    border: 3px solid var(--primary-color);
+    object-fit: cover;
 }
 
 .member-name {
-    margin-top: 10px;
-    font-weight: bold;
+    margin: 1rem 0 0.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
 }
 
 .action_btn button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background: #4A90E2;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
-    transition: 0.3s;
+    transition: var(--transition);
+    font-weight: 600;
+    width: 100%;
 }
 
 .action_btn button:hover {
-    background: #357ABD;
+    background: var(--primary-dark);
 }

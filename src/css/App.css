@@ -1,15 +1,50 @@
+:root {
+  --primary-color: #4A90E2;
+  --primary-dark: #357ABD;
+  --secondary-color: #2C3E50;
+  --light-color: #FFFFFF;
+  --dark-color: #242424;
+  --text-light: rgba(255, 255, 255, 0.87);
+  --text-dark: #213547;
+  --error-bg: #f8d7da;
+  --error-text: #721c24;
+  --error-border: #f5c6cb;
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --border-radius-sm: 5px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 10px;
+  --transition: all 0.3s ease;
+}
+
+/* App.css */
 #root {
-  max-width: 1280px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
-  margin-left: 250px; /* Pushes content away from sidebar */
-  margin-top: 90px; /* Pushes content down below navbar */
+  margin-left: 330px;
+  margin-top: 70px;
+  padding: 2rem;
   flex-grow: 1;
+  transition: var(--transition);
 }
 
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
 
+  .main-content {
+    margin-left: 0;
+  }
 
+  .sidebar.active {
+    transform: translateX(0);
+  }
+}
