@@ -1,5 +1,5 @@
 import SideBar from "../components/SideBar.jsx";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import api from "../services/api.js";
 import FirstPage from "../components/FirstPage.jsx";
@@ -16,6 +16,7 @@ function Detail() {
     const [update, setUpdate] = useState(false);
     const [loading, setLoading] = useState(true);
     const {user, personal} = useAuthContext()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,6 +28,7 @@ function Detail() {
             }
             catch (error) {
                 console.log(error)
+                navigate("/")
             }
             finally {
                 setLoading(false);
@@ -71,12 +73,35 @@ function Detail() {
             .catch(err => console.log(err))
     }
 
+    async function deleteLibrary() {
+        await api.delete("deleteLibrary", {
+            data: {
+                library_id: id
+            }
+        })
+            .then(res => {console.log(res); navigate("/")})
+            .catch(err => console.log(err))
+    }
+
+    async function leaveLibrary() {
+        await api.delete("leaveLibrary", {
+            data: {
+                library_id: id,
+            }
+        })
+            .then(res => {console.log(res); navigate("/")})
+            .catch(err => console.log(err))
+    }
+
     return (
         <>
             <SideBar data={data} />
             {personal !== id &&
                 <>
-                    {data?.creator ? <DeleteButton/> : <DeleteButton message={"Leave Library"}/>}
+                    {data?.creator ?
+                        <DeleteButton customFunction={deleteLibrary}/>
+                        :
+                        <DeleteButton message={"Leave Library"} customFunction={leaveLibrary}/>}
                 </>
             }
             <div className="content-area">

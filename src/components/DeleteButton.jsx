@@ -1,9 +1,10 @@
 import styles from "../css/deletebutton.module.css"
 
-function DeleteButton({message="Delete Library"}) {
+function DeleteButton({message="Delete Library", customFunction, id}) {
     return (
         <>
-        <button className={styles.button}>{message}</button>
+            {id ? <button className={styles.button} onClick={() => customFunction(id)}>{message}</button>
+            : <button className={styles.button} onClick={customFunction}>{message}</button>}
         </>
     )
 }

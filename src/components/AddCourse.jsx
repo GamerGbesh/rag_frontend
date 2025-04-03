@@ -7,7 +7,7 @@ function AddCourse({id}) {
     const [error, setError] = useState(null);
     const [course, setCourse] = useState(null);
     const [description, setDescription] = useState(null);
-    const {setStatus, status} = useAuthContext()
+    const {setStatus, status, addLibrary, setAddLibrary} = useAuthContext()
 
 
     const handleSubmit = async (e) => {

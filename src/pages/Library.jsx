@@ -16,7 +16,7 @@ function Library() {
     const location = useLocation()
     const id = location.state?.id;
     const [data, setData] = useState(null);
-    const {user, status, setAddLibrary, addLibrary, content, setContent} = useAuthContext()
+    const {user, status, setStatus,setAddLibrary, addLibrary, content, setContent} = useAuthContext()
     const navigate = useNavigate();
     const [courseData, setCourseData] = useState([]);
     const [courseId, setCourseId] = useState(-1);
@@ -54,6 +54,7 @@ function Library() {
             }
             catch(err){
                 console.log(err);
+                navigate("/")
             }
         }
 
@@ -95,6 +96,17 @@ function Library() {
         setContent(!content)
     }
 
+    async function deleteCourse(course_id) {
+        await api.delete("Courses", {
+            data: {
+                course_id,
+                library_id: id,
+            }
+        })
+            .then(res => {console.log(res); setStatus(!status); setCourseId(-1)})
+            .catch(err => console.log(err))
+    }
+
 
     if (!user){
         return <FirstPage />
@@ -102,17 +114,18 @@ function Library() {
 
     if (courseId === -1) {
         return (
-            <div className="Instructions">
+            <>
                 <SideBar data={data} activeFunction={activeFunction} headerFunction={headerFunction} addFunction={addFunction}/>
+
                 {addLibrary ? <AddCourse id={id}/>
-                    : ( <>
-                        <SideBar data={data} activeFunction={activeFunction} headerFunction={headerFunction} addFunction={addFunction}/>
-                        Select a course from the side-bar to view its content.<br/>
-                        Create a course using the + button if you have no course.<br/>
-                        The AI would be enabled once documents have been uploaded to the course.
-                    </>)
+                    : (
+                        <div className="Instructions">
+                            Select a course from the side-bar to view its content.<br/>
+                            Create a course using the + button if you have no course.<br/>
+                            The AI would be enabled once documents have been uploaded to the course.
+                        </div>)
                 }
-            </div>
+            </>
         )
     }
 
@@ -123,11 +136,11 @@ function Library() {
             {addLibrary ? <AddCourse id={id}/>
             : (
                 <>
-                    {data?.active && <DeleteButton message={"Delete Course"}/>}
+                    {data?.active && <DeleteButton message={"Delete Course"} customFunction={deleteCourse} id={courseId}/>}
                     <div className="content-area">
                         {!content ?
-                        courseData?.map((docs, index) => (
-                            <ContentCard content={docs} key={docs.id} quiz={true}/>
+                        courseData?.data?.map((docs, index) => (
+                            <ContentCard content={docs} key={docs.id} quiz={true} permission={courseData?.permission}/>
                         ))
                         :(
                             <AddContent course_id={courseId} library_id={id} activeFunction={activeFunction}/>
@@ -148,7 +161,7 @@ function Library() {
                 )
             }
 
-            {courseData.length >= 1 ? <div style={{ width: '300px' }}>
+            {courseData?.data.length >= 1 ? <div style={{ width: '300px' }}>
                 <AutoResizingTextarea
                     placeholder="Type your message..."
                     minRows={1}
@@ -167,7 +180,7 @@ function Library() {
                     }}
                 />
             </div> : (
-                <p style={{
+                !addLibrary && <p style={{
                     color:"red",
                     "font-size": "1.250rem",
                     "position":"relative",
