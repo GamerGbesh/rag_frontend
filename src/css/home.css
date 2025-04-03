@@ -3,7 +3,7 @@
     max-width: 800px;
     flex-grow: 1;
     overflow-y: auto; /* Enables scrolling */
-    padding-bottom: 10%; /* Prevents content from touching input */
+    padding-bottom: 15%; /* Prevents content from touching input */
     height: 100%; /* Takes full height */
 }
 

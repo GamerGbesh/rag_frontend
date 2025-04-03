@@ -8,7 +8,7 @@ function SideBar({data, addFunction, activeFunction}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [active, setActive] = useState(null);
-    const {user} = useAuthContext()
+    const {user, sidebarOpen} = useAuthContext()
 
     useEffect(() => {
         const checkLoading = () => {
@@ -26,7 +26,7 @@ function SideBar({data, addFunction, activeFunction}) {
 
     return (<>
         { user &&
-        <div className="sidebar">
+        <div className={`sidebar ${sidebarOpen ? "active" : ""}`}>
             {loading ? (
                 <p>Loading...</p>
             ) : (

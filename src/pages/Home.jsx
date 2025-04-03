@@ -6,13 +6,12 @@ import {useAuthContext} from "../contexts/AuthContext.jsx";
 import FirstPage from "../components/FirstPage.jsx";
 import CreateLibrary from "../components/CreateLibrary.jsx";
 import "../css/home.css"
-import createLibrary from "../components/CreateLibrary.jsx";
-
+import "../css/mobile.css"
 
 export function Home() {
     const navigate = useNavigate();
     const [data, setData] = useState(null);
-    const {user, status, setAddLibrary, addLibrary} = useAuthContext()
+    const {user, status, setAddLibrary, addLibrary, setPersonal} = useAuthContext()
 
     useEffect(() => {
         const setting = () => {
@@ -26,6 +25,7 @@ export function Home() {
             try {
                 const response = await api.get("/Libraries");
                 setData(response.data);
+                setPersonal(response.data.body[0].id);
 
             }
             catch (error) {

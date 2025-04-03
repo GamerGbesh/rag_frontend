@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 import api from "../services/api.js";
-import "../css/createlibrary.css"
+import "../css/mobile.css"
 
 
 export function AddContent({course_id, library_id, activeFunction}) {

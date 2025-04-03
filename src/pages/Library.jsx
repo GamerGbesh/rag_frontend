@@ -9,6 +9,7 @@ import ContentCard from "../components/ContentCard.jsx";
 import {AddContent} from "../components/AddContent.jsx";
 import "../css/home.css"
 import AutoResizingTextarea from "../components/AutoResizingTextArea.jsx";
+import DeleteButton from "../components/DeleteButton.jsx";
 
 
 function Library() {
@@ -103,9 +104,14 @@ function Library() {
         return (
             <div className="Instructions">
                 <SideBar data={data} activeFunction={activeFunction} headerFunction={headerFunction} addFunction={addFunction}/>
-                Select a course from the side-bar to view its content.<br/>
-                Create a course using the + button if you have no course.<br/>
-                The AI would be enabled once documents have been uploaded to the course.
+                {addLibrary ? <AddCourse id={id}/>
+                    : ( <>
+                        <SideBar data={data} activeFunction={activeFunction} headerFunction={headerFunction} addFunction={addFunction}/>
+                        Select a course from the side-bar to view its content.<br/>
+                        Create a course using the + button if you have no course.<br/>
+                        The AI would be enabled once documents have been uploaded to the course.
+                    </>)
+                }
             </div>
         )
     }
@@ -116,26 +122,29 @@ function Library() {
 
             {addLibrary ? <AddCourse id={id}/>
             : (
-                <div className="content-area">
-                    {!content ?
-                    courseData?.map((docs, index) => (
-                        <ContentCard content={docs} key={docs.id} quiz={true}/>
-                    ))
-                    :(
-                        <AddContent course_id={courseId} library_id={id} activeFunction={activeFunction}/>
-                    )}
-                    {data?.active &&
-                        <button  className={"submit"}
-                                 onClick={handleClick}
-                                 style={{
-                                     width: "30%",
-                                     position: "relative",
-                                     left: "35%",
-                                 }}
-                        >
-                            {content ? "X" : "Add Document"}
-                        </button>}
-                </div>
+                <>
+                    {data?.active && <DeleteButton message={"Delete Course"}/>}
+                    <div className="content-area">
+                        {!content ?
+                        courseData?.map((docs, index) => (
+                            <ContentCard content={docs} key={docs.id} quiz={true}/>
+                        ))
+                        :(
+                            <AddContent course_id={courseId} library_id={id} activeFunction={activeFunction}/>
+                        )}
+                        {data?.active &&
+                            <button  className={"submit"}
+                                     onClick={handleClick}
+                                     style={{
+                                         width: "30%",
+                                         position: "relative",
+                                         left: "35%",
+                                     }}
+                            >
+                                {content ? "X" : "Add Document"}
+                            </button>}
+                    </div>
+                </>
                 )
             }
 
@@ -145,19 +154,26 @@ function Library() {
                     minRows={1}
                     maxRows={10}
                     style={{
-                        padding: '30px',
+                        padding: '50px',
+
                         border: '1px solid #ccc',
                         borderRadius: '20px',
                         fontFamily: 'inherit',
-                        position: 'relative',
-                        bottom: '50px',
-                        right: '85%',
-                        width: '250%',
+                        position: 'absolute',
+                        bottom: '75px',
+                        right: '14%',
+                        width: '66%',
                         resize: 'none',
                     }}
                 />
             </div> : (
-                <p style={{color:"red", "font-size": "1.250rem", "position":"relative", bottom:"30px"}}>Add documents to be able to use the AI</p>
+                <p style={{
+                    color:"red",
+                    "font-size": "1.250rem",
+                    "position":"relative",
+                    bottom:"30px"}}>
+                    Add documents to be able to use the AI
+                </p>
             )}
 
         </>

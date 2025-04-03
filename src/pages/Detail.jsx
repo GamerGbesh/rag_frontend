@@ -5,6 +5,7 @@ import api from "../services/api.js";
 import FirstPage from "../components/FirstPage.jsx";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 import ContentCard from "../components/ContentCard.jsx";
+import DeleteButton from "../components/DeleteButton.jsx";
 
 
 function Detail() {
@@ -14,7 +15,7 @@ function Detail() {
     const [data, setData] = useState(null);
     const [update, setUpdate] = useState(false);
     const [loading, setLoading] = useState(true);
-    const {user} = useAuthContext()
+    const {user, personal} = useAuthContext()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,6 +74,11 @@ function Detail() {
     return (
         <>
             <SideBar data={data} />
+            {personal !== id &&
+                <>
+                    {data?.creator ? <DeleteButton/> : <DeleteButton message={"Leave Library"}/>}
+                </>
+            }
             <div className="content-area">
                 {data?.members.length > 0 ? (
                     data?.members.map((member, index) => (

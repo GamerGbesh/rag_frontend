@@ -1,0 +1,14 @@
+.submit{
+    position: relative;
+    bottom: 65px;
+    left: 178%;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 5px;
+    width: 15%;
+    height: 90%;
+    cursor: pointer;
+    background-color: #bababa;
+    font-weight: bold;
+
+}

@@ -1,0 +1,167 @@
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    /* General adjustments */
+    body {
+        font-size: 14px;
+    }
+
+    /* Main content area */
+    .main-content {
+        padding: 1rem;
+        margin-left: 0;
+        margin-top: 60px; /* Reduced header height */
+        height: calc(100vh - 60px);
+    }
+
+    /* Navbar */
+    .navbar {
+        height: 60px;
+        padding: 0 1rem;
+        width: 100%;
+    }
+
+    .navbar-brand a {
+        font-size: 1.2rem;
+    }
+
+    .navbar-links {
+        gap: 0.5rem;
+    }
+
+    .navbar-links a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .profile-pic {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Sidebar - already has mobile styles */
+
+    /* Content area */
+    .content-area {
+        width: 95%;
+        max-width: none;
+        padding-bottom: 20%; /* More space for input */
+    }
+
+    .input-box {
+        width: 95%;
+        bottom: 10%;
+        height: auto;
+        padding: 8px;
+    }
+
+    .input-box textarea {
+        width: 90%;
+        left: 10px;
+        padding-bottom: 20px;
+    }
+
+    /* Content cards */
+    .content-card {
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .content-card .btn-group {
+        position: static;
+        visibility: visible;
+        margin-top: 0.5rem;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    /* Member cards */
+    .member-card {
+        width: 140px;
+        padding: 1rem;
+        margin: 0.5rem;
+    }
+
+    .member-pic img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Forms */
+    form {
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .form-group input {
+        padding: 0.6rem;
+    }
+
+    .submit {
+        padding: 0.6rem;
+    }
+    #menu-btn {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        background: #333;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    #menu-btn:hover {
+        background: #555;
+    }
+}
+
+/* Extra small devices (phones, 480px and down) */
+@media (max-width: 480px) {
+    /* Navbar */
+    .navbar {
+        padding: 0 0.5rem;
+    }
+
+    .navbar-links a:not(.profile-pic) {
+        display: none; /* Hide regular nav links */
+    }
+
+    /* Content cards */
+    .content-card {
+        padding: 0.8rem;
+    }
+
+    .content-name {
+        font-size: 1rem;
+    }
+
+    /* Member cards grid adjustment */
+    .member-card {
+        width: calc(50% - 1rem);
+    }
+
+    /* Forms */
+    form {
+        padding: 1rem;
+        box-shadow: none;
+        background: transparent;
+    }
+}
+
+/* Mobile menu toggle (add this if you have a hamburger menu) */
+.mobile-menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--light-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+}

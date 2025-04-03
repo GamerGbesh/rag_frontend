@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import styles from "../css/autoresizing.module.css"
 
 const AutoResizingTextarea = ({
                                   placeholder = 'Type here...',
                                   minRows = 1,
                                   maxRows = 10,
+                                  handleClick,
                                   ...props
                               }) => {
     const [value, setValue] = useState('');
@@ -36,21 +38,25 @@ const AutoResizingTextarea = ({
     };
 
     return (
-        <textarea
-            ref={textareaRef}
-            value={value}
-            onChange={handleChange}
-            placeholder={placeholder}
-            style={{
-                width: '100%',
-                resize: 'none', // Disable user resizing
-                overflow: 'hidden', // Hide scrollbar
-                minHeight: `${parseInt(getComputedStyle(document.documentElement).lineHeight, 10) * minRows}px`,
-                boxSizing: 'border-box', // Include padding in height calculation
-                ...props.style,
-            }}
-            {...props}
-        />
+        <>
+            <textarea
+                ref={textareaRef}
+                value={value}
+                onChange={handleChange}
+                placeholder={placeholder}
+                style={{
+                    width: '100%',
+                    resize: 'none', // Disable user resizing
+                    overflow: 'hidden', // Hide scrollbar
+                    minHeight: `${parseInt(getComputedStyle(document.documentElement).lineHeight, 10) * minRows}px`,
+                    boxSizing: 'border-box', // Include padding in height calculation
+
+                    ...props.style,
+                }}
+                {...props}
+            />
+            <button className={`submit ${styles.submit}`} onClick={handleClick} >↑</button>
+        </>
     );
 };
 

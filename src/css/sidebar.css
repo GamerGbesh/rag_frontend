@@ -73,3 +73,20 @@
     background: var(--primary-dark);
     transform: scale(1.1);
 }
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 40%;
+        position: absolute;
+        top: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+}
