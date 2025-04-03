@@ -9,18 +9,18 @@ function CreateLibrary() {
     const [library, setLibrary] = useState(null);
     const [description, setDescription] = useState(null);
     const [entryKey, setEntryKey] = useState(null);
-    const {setStatus, status} = useAuthContext()
+    const {setStatus, status, setAddLibrary, addLibrary} = useAuthContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (toggle){
             await api.post("createLibrary", {library_name:library, library_description:description, entry_key:entryKey})
-                .then(result => {setError(null)})
+                .then(result => {setError(null); setAddLibrary(!addLibrary);})
                 .catch(err => {setError(err.response.data.library_name)});
             setStatus(!status)
         } else {
             await api.post("joinLibrary", {library_name:library, entry_key:entryKey})
-                .then(result => {setError(null)})
+                .then(result => {setError(null); setAddLibrary(!addLibrary);})
                 .catch(err => {setError(err.response.data.detail || err.response.data.message)});
             setStatus(!status)
         }

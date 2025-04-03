@@ -34,7 +34,8 @@ function SideBar({data, addFunction, activeFunction}) {
                     <div className="side-header">
                         {data?.header.library_name || data?.header}{data?.header_active &&
                             <>
-                                <br/><Link to={"/library/details"} state={{id:data?.header.id}}>Details</Link>
+                                 <br/> {!data?.creator ? <Link to={"/library/details"} state={{id:data?.header.id}}>Details</Link>
+                                : data?.sub_header && <span style={{"font-size":"14px", "font-style":"italic"}}>Entry key: {data?.sub_header}</span>}
                             </>
                         }
                     </div>
@@ -45,7 +46,7 @@ function SideBar({data, addFunction, activeFunction}) {
                                 activeFunction(item.id);
                                 setActive(index)
                             }}>
-                                {item.library_name || item.course_name}
+                                {item.library_name || item.course_name || item.user.username}
                             </p>
                         ))
                     }

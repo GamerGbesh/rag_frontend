@@ -24,7 +24,7 @@ function Library() {
     const fetchDataPerCourse = async (id) => {
         try {
             const response = await api.get("getDocuments", {
-                params: {course_id: id},
+                params: {course_id: id, library_id: id},
             })
             setCourseData(response.data)
         }
@@ -63,8 +63,7 @@ function Library() {
     const activeFunction = async (index) => {
         try {
             const response = await api.get("getDocuments", {
-                params: {course_id: index},
-
+                params: {course_id: index, library_id: id},
             })
             setCourseData(response.data)
             setCourseId(index);
@@ -119,8 +118,8 @@ function Library() {
             : (
                 <div className="content-area">
                     {!content ?
-                    courseData?.map((content, index) => (
-                        <ContentCard content={content} key={content.id}/>
+                    courseData?.map((docs, index) => (
+                        <ContentCard content={docs} key={docs.id} quiz={true}/>
                     ))
                     :(
                         <AddContent course_id={courseId} library_id={id} activeFunction={activeFunction}/>
@@ -158,7 +157,7 @@ function Library() {
                     }}
                 />
             </div> : (
-                <p style={{color:"red", "font-size": "1.250rem"}}>Add documents to be able to use the AI</p>
+                <p style={{color:"red", "font-size": "1.250rem", "position":"relative", bottom:"30px"}}>Add documents to be able to use the AI</p>
             )}
 
         </>
