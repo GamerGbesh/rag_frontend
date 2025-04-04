@@ -25,7 +25,7 @@ export function Home() {
             try {
                 const response = await api.get("/Libraries");
                 setData(response.data);
-                setPersonal(response.data.body[0].id);
+
 
             }
             catch (error) {

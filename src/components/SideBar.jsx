@@ -2,13 +2,13 @@ import "../css/sidebar.css"
 import {useEffect, useState} from "react";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 import {Link} from "react-router-dom";
+import SideCard from "./SideCard.jsx";
 
 
 function SideBar({data, addFunction, activeFunction}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [active, setActive] = useState(null);
-    const {user, sidebarOpen} = useAuthContext()
+    const {user, sidebarOpen, setPersonal} = useAuthContext()
 
     useEffect(() => {
         const checkLoading = () => {
@@ -16,6 +16,9 @@ function SideBar({data, addFunction, activeFunction}) {
                 setLoading(false);
                 setError(null);
                 console.log(data);
+                if (data.user){
+                    setPersonal(data.user.id);
+                }
             }
 
         }
@@ -41,14 +44,14 @@ function SideBar({data, addFunction, activeFunction}) {
                     </div>
 
                     <div className="side-body">{
-                        data?.body?.map((item, index) => (
-                            <p className={`${index} ${index===active ? "active" : ""}`} key={index} onClick={() => {
-                                activeFunction(item.id);
-                                setActive(index)
-                            }}>
-                                {item.library_name || item.course_name || item.user.username}
-                            </p>
-                        ))
+                        <>
+                            <>
+                                {data?.user && <SideCard activeFunction={activeFunction} item={data?.user}/>}
+                            </>
+                            {data?.body?.map((item, index) => (
+                                <SideCard item={item} key={index} activeFunction={activeFunction} index={index}/>
+                            ))}
+                        </>
                     }
 
                         {data?.active && <div className="add-more">

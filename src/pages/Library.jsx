@@ -107,6 +107,16 @@ function Library() {
             .catch(err => console.log(err))
     }
 
+    async function deleteFunction(doc_id) {
+        await api.delete("deleteDocuments", {
+            data: {
+                library_id: id,
+                doc_id: doc_id,
+            }
+        })
+            .then(res => {console.log(res); setStatus(!status); activeFunction(courseId)})
+    }
+
 
     if (!user){
         return <FirstPage />
@@ -140,7 +150,13 @@ function Library() {
                     <div className="content-area">
                         {!content ?
                         courseData?.data?.map((docs, index) => (
-                            <ContentCard content={docs} key={docs.id} quiz={true} permission={courseData?.permission}/>
+                            <ContentCard content={docs}
+                                         key={docs.id}
+                                         quiz={true}
+                                         permission={courseData?.permission}
+                                         deleteFunction={deleteFunction}
+
+                            />
                         ))
                         :(
                             <AddContent course_id={courseId} library_id={id} activeFunction={activeFunction}/>
