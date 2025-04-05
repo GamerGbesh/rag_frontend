@@ -9,6 +9,8 @@ function SideBar({data, addFunction, activeFunction}) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const {user, sidebarOpen, setPersonal} = useAuthContext()
+    const [active, setActive] = useState(null);
+
 
     useEffect(() => {
         const checkLoading = () => {
@@ -49,7 +51,12 @@ function SideBar({data, addFunction, activeFunction}) {
                                 {data?.user && <SideCard activeFunction={activeFunction} item={data?.user}/>}
                             </>
                             {data?.body?.map((item, index) => (
-                                <SideCard item={item} key={index} activeFunction={activeFunction} index={index}/>
+                                <SideCard item={item}
+                                          key={index}
+                                          activeFunction={activeFunction}
+                                          index={index}
+                                          setActive={setActive}
+                                          active={active}/>
                             ))}
                         </>
                     }

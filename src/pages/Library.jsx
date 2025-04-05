@@ -10,6 +10,7 @@ import {AddContent} from "../components/AddContent.jsx";
 import "../css/home.css"
 import AutoResizingTextarea from "../components/AutoResizingTextArea.jsx";
 import DeleteButton from "../components/DeleteButton.jsx";
+import Popup from "../components/Popup.jsx";
 
 
 function Library() {
@@ -20,19 +21,9 @@ function Library() {
     const navigate = useNavigate();
     const [courseData, setCourseData] = useState([]);
     const [courseId, setCourseId] = useState(-1);
+    const [document, setDocument] = useState(null);
 
 
-    const fetchDataPerCourse = async (id) => {
-        try {
-            const response = await api.get("getDocuments", {
-                params: {course_id: id, library_id: id},
-            })
-            setCourseData(response.data)
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
 
     useEffect(() => {
         const setting = () => {
@@ -69,12 +60,12 @@ function Library() {
             })
             setCourseData(response.data)
             setCourseId(index);
+            console.log(response.data)
         }
         catch (e) {
             console.log(e)
         }
     }
-
 
 
     const addFunction = (e) =>{
@@ -117,6 +108,14 @@ function Library() {
             .then(res => {console.log(res); setStatus(!status); activeFunction(courseId)})
     }
 
+    function makeFunction(doc_id) {
+        setDocument(doc_id);
+    }
+
+    function onSubmit(questionNumber){
+        navigate("/quiz", {state: {document_id: document, library_id: id, number_of_questions: questionNumber}})
+    }
+
 
     if (!user){
         return <FirstPage />
@@ -139,14 +138,21 @@ function Library() {
         )
     }
 
+
+
     return (
         <>
-        <SideBar data={data} activeFunction={activeFunction} headerFunction={headerFunction} addFunction={addFunction}/>
+            <SideBar data={data}
+                     activeFunction={activeFunction}
+                     headerFunction={headerFunction}
+                     addFunction={addFunction}
+            />
 
             {addLibrary ? <AddCourse id={id}/>
             : (
                 <>
                     {data?.active && <DeleteButton message={"Delete Course"} customFunction={deleteCourse} id={courseId}/>}
+                    {document && <Popup onSubmit={onSubmit}/>}
                     <div className="content-area">
                         {!content ?
                         courseData?.data?.map((docs, index) => (
@@ -155,7 +161,7 @@ function Library() {
                                          quiz={true}
                                          permission={courseData?.permission}
                                          deleteFunction={deleteFunction}
-
+                                         makeFunction={makeFunction}
                             />
                         ))
                         :(

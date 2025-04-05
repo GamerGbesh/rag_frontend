@@ -7,6 +7,8 @@ form {
     background: var(--light-color);
     box-shadow: var(--shadow-md);
     border-radius: var(--border-radius-md);
+    position: relative;
+    right: 10%;
 }
 
 .form-group {

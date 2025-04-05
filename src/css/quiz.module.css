@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--light-bg);
+    padding: 2rem 1rem;
+    overflow-y: auto;
+}
+
+.quiz-header {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.quiz-title {
+    font-size: 1.8rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+}
+
+.quiz-progress {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}

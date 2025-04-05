@@ -1,7 +1,6 @@
 import {useState} from "react";
 
-function SideCard({item, index, activeFunction}) {
-    const [active, setActive] = useState(null);
+function SideCard({item, index, activeFunction, active, setActive}) {
 
     return (
         <p className={`${index} ${index===active ? "active" : ""}`} key={index} onClick={() => {
