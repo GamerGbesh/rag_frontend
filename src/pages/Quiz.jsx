@@ -2,15 +2,22 @@ import Questions from "../components/Questions.jsx";
 import styles from "../css/quiz.module.css"
 import {useEffect, useState} from "react";
 import api from "../services/api.js";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import popup from "../components/Popup.jsx";
+import Popup from "../components/Popup.jsx";
 
 function Quiz() {
-    const [question, setQuestion] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [currentQuestion, setCurrentQuestion] = useState(1);
+    const [question, setQuestion] = useState([]);
+    const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [explanation, setExplanation] = useState([]);
+    const [correctAnswer, setCorrectAnswer] = useState(null);
+    const [done, setDone] = useState(false);
+    const [correct, setCorrect] = useState(0);
+    const navigate = useNavigate();
 
     const location = useLocation();
     const document_id = location.state.document_id;
@@ -25,39 +32,66 @@ function Quiz() {
                     document_id: document_id,
                     number_of_questions: number_of_questions,
                     library_id:library_id,
-                    page: currentQuestion,
             }
         })
                 .then((res) => {
-                    setQuestion(res.data.results[0][0][1]);
-                    setAnswers(res.data.results[0][1][1]);
-                    setExplanation(res.data.results[0][3][1]);
+                    setQuestions(res.data);
+                    setCurrentQuestion(1);
                     console.log(res.data);
                 })
             .catch((err) => {
                 console.log(err);
             })
-            .finally(() => setLoading(false));
+                .finally(() => {setLoading(false);});
     }
     fetchQuestions();
+    }, []);
+
+
+
+    useEffect(() => {
+        function fetchQuestions() {
+            setQuestion(questions[currentQuestion-1].question);
+            setAnswers(questions[currentQuestion-1].options);
+            setExplanation(questions[currentQuestion-1].explanation);
+            switch (questions[currentQuestion-1].answer){
+                case "A": setCorrectAnswer(0); break;
+                case "B": setCorrectAnswer(1); break;
+                case "C": setCorrectAnswer(2); break;
+                case "D": setCorrectAnswer(3); break;
+            }
+            console.log(correctAnswer);
+
+        }
+        if (!loading) fetchQuestions();
     }, [currentQuestion]);
 
-    function onQuestionChange(question) {
-        setCurrentQuestion(question);
+    function onQuestionChange(question)
+    {
+        if (question > number_of_questions) setDone(true);
+
+        else setCurrentQuestion(question);
     }
+
 
     return (
         <div className={styles.container}>
             {loading ? (
-             <p>Generating questions</p>
+             <p>Generating questions...</p>
             ):
-                <Questions question={question}
-                           answers={answers}
-                           explanation={explanation}
-                           currentPage={currentQuestion}
-                           totalPages={number_of_questions}
-                           onQuestionChange={onQuestionChange}
-                />
+                <>
+                    {done && <Popup count={number_of_questions}  correct={correct} library_id={library_id} />}
+                    <Questions question={question}
+                               answers={answers}
+                               explanation={explanation}
+                               currentQuestion={currentQuestion}
+                               totalQuestions={number_of_questions}
+                               correctAnswer={correctAnswer}
+                               onQuestionChange={onQuestionChange}
+                               setCorrect={setCorrect}
+                               correct={correct}
+                    />
+                </>
             }
         </div>
     )

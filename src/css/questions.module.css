@@ -16,7 +16,6 @@
 .question {
     font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
     color: var(--dark-color);
     line-height: 1.4;
     animation: textFocusIn 0.8s both;
@@ -25,8 +24,6 @@
 .answers {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
 }
 
 .answers .answer {
@@ -74,8 +71,6 @@
 
 .explanation {
     font-style: italic;
-    padding: 1rem;
-    margin-top: 1rem;
     background: var(--light-bg);
     border-radius: var(--border-radius-sm);
     color: var(--text-muted);
@@ -84,6 +79,13 @@
     animation: fadeIn 0.8s ease-out;
     opacity: 0;
     animation-fill-mode: forwards;
+}
+.explanation span{
+    visibility: hidden;
+}
+
+.explanation:active span {
+    visibility: visible;
 }
 
 /* Keyframe Animations */
