@@ -28,6 +28,7 @@ function Detail() {
             }
             catch (error) {
                 console.log(error)
+                alert("You are no longer in this library")
                 navigate("/")
             }
             finally {

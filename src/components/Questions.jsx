@@ -27,7 +27,9 @@ function Questions({question,
                 </p>
                 <div className={styles.answers}>
                     {answers.map((answer, index) => (
-                        <p key={index} className={`${styles.answer} ${index===correctAnswer ? styles.correct : styles.incorrect}`}>
+                        <p key={index}
+                           className={`${styles.answer} ${index===correctAnswer ? styles.correct : styles.incorrect}`}
+                        >
                             {answer}
                         </p>
                     ))}

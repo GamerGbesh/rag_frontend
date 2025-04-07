@@ -37,16 +37,41 @@ function CreateLibrary() {
         <>
             <form onSubmit={handleSubmit}>
                 <div className={"toggle"}>
-                    <button className={toggle ? "toggle-btn" : undefined} onClick={switcher}>Create Library</button>
-                    <button className={!toggle ? "toggle-btn" : undefined} onClick={switcher}>Join Library</button>
+                    <button
+                        className={toggle ? "toggle-btn" : undefined}
+                        onClick={switcher}
+                    >
+                        Create Library
+                    </button>
+                    <button
+                        className={!toggle ? "toggle-btn" : undefined}
+                        onClick={switcher}
+                    >
+                        Join Library
+                    </button>
                 </div>
                 {toggle ? <h2>Create Library</h2> : <h2>Join Library</h2>}
                 {error && <div className="alert alert-danger">{error}</div>}
 
                 <div className="form-group">
-                    <input type="text" placeholder="Library Name" required onChange={(e) => setLibrary(e.target.value)} />
-                    {toggle && <input type="text" placeholder="Library Description"  required onChange={(e) => setDescription(e.target.value)} />}
-                    <input type="text" placeholder="Entry Key" required onChange={(e) => setEntryKey(e.target.value)} />
+                    <input
+                        type="text"
+                        placeholder="Library Name"
+                        required
+                        onChange={(e) => setLibrary(e.target.value)}
+                    />
+                    {toggle && <input
+                        type="text"
+                        placeholder="Library Description"
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                    />}
+                    <input
+                        type="text"
+                        placeholder="Entry Key"
+                        required
+                        onChange={(e) => setEntryKey(e.target.value)}
+                    />
                 </div>
                 <button type="submit" className={"submit"}>Submit</button>
             </form>

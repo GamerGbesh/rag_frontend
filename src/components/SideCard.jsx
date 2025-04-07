@@ -1,5 +1,3 @@
-import {useState} from "react";
-
 function SideCard({item, index, activeFunction, active, setActive}) {
 
     return (

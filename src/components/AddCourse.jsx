@@ -9,15 +9,18 @@ function AddCourse({id}) {
     const [description, setDescription] = useState(null);
     const {setStatus, status, addLibrary, setAddLibrary} = useAuthContext()
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await api.post("Courses", {course_name:course, course_description:description, library_id:id})
+        await api.post("Courses", {
+            course_name:course,
+            course_description:description,
+            library_id:id
+        })
             .then(result => {setError(null)})
             .catch(err => {setError(err.response.data.detail || err.response.data.error)});
-        setStatus(!status)
 
+        setStatus(!status)
     }
 
 

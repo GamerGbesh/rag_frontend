@@ -1,7 +1,13 @@
 import "../css/contentcard.css"
-import api from "../services/api.js";
 
-function ContentCard({content, makeFunction, quiz, creator, removeFunction, deleteFunction, permission}) {
+function ContentCard({
+                         content,
+                         makeFunction,
+                         quiz, creator,
+                         removeFunction,
+                         deleteFunction,
+                         permission
+}) {
     const baseUrl = "http://localhost:8000"
 
     if (quiz){
@@ -15,8 +21,18 @@ function ContentCard({content, makeFunction, quiz, creator, removeFunction, dele
                 </a>
 
                 <div className="btn-group">
-                    <button className={"content-btn"} onClick={() => makeFunction(content.id)}>Generate quiz</button>
-                    {permission && <button className={"content-btn"} onClick={() => deleteFunction(content.id)}>🗑️</button>}
+                    <button
+                        className={"content-btn"}
+                        onClick={() => makeFunction(content.id)}
+                    >
+                        Generate quiz
+                    </button>
+                    {permission && <button
+                        className={"content-btn"}
+                        onClick={() => deleteFunction(content.id)}
+                    >
+                        🗑️
+                    </button>}
                 </div>
 
             </div>
@@ -29,10 +45,27 @@ function ContentCard({content, makeFunction, quiz, creator, removeFunction, dele
 
             <div className="btn-group">
 
-                {creator && content.is_admin ? <button className={"content-btn"} onClick={() => removeFunction(content.user.id)}>Demote admin</button>
-                : creator && <button className={"content-btn"} onClick={() => makeFunction(content.user.id)}>Make admin</button>}
+                {creator && content.is_admin ?
+                    <button
+                        className={"content-btn"}
+                        onClick={() => removeFunction(content.user.id)}
+                    >
+                        Demote admin
+                    </button>
+                : creator && <button
+                    className={"content-btn"}
+                    onClick={() => makeFunction(content.user.id)}
+                >
+                    Make admin
+                </button>}
 
-                {creator && <button className={"content-btn"} onClick={() => deleteFunction(content.user.id)}>🗑️</button>}
+                {creator &&
+                    <button
+                        className={"content-btn"}
+                        onClick={() => deleteFunction(content.user.id)}
+                    >
+                        🗑️
+                    </button>}
             </div>
         </div>
     )

@@ -50,7 +50,8 @@ function Popup({ onSubmit, correct, count, library_id }) {
                         min={5}
                         max={10}
                         value={questionCount}
-                        onChange={(e) => setQuestionCount(Math.min(Math.max(parseInt(e.target.value), 5), 20))}
+                        onChange={(e) =>
+                            setQuestionCount(Math.min(Math.max(parseInt(e.target.value), 5), 20))}
                         required
                     />
                 </div>

@@ -22,7 +22,6 @@ function SideBar({data, addFunction, activeFunction}) {
                     setPersonal(data.user.id);
                 }
             }
-
         }
         checkLoading();
 
@@ -39,8 +38,13 @@ function SideBar({data, addFunction, activeFunction}) {
                     <div className="side-header">
                         {data?.header.library_name || data?.header}{data?.header_active &&
                             <>
-                                 <br/> {!data?.creator ? <Link to={"/library/details"} state={{id:data?.header.id}}>Details</Link>
-                                : data?.sub_header && <span style={{"font-size":"14px", "font-style":"italic"}}>Entry key: {data?.sub_header}</span>}
+                                 <br/> {!data?.creator ?
+                                <Link to={"/library/details"} state={{id:data?.header.id}}>Details</Link>
+                                : data?.sub_header && <span
+                                style={{"font-size":"14px", "font-style":"italic"}}
+                            >
+                                Entry key: {data?.sub_header}
+                                </span>}
                             </>
                         }
                     </div>
@@ -56,7 +60,8 @@ function SideBar({data, addFunction, activeFunction}) {
                                           activeFunction={activeFunction}
                                           index={index}
                                           setActive={setActive}
-                                          active={active}/>
+                                          active={active}
+                                />
                             ))}
                         </>
                     }
