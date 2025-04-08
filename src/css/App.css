@@ -49,6 +49,13 @@
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
+
+
+  --textarea-line-height: 24px;          /* Explicit pixel value for calculations */
+  --textarea-min-rows: 1;                /* Unitless number */
+  --textarea-max-rows: 10;               /* Unitless number */
+  --textarea-min-height: calc(var(--textarea-line-height) * var(--textarea-min-rows));
+  --textarea-max-height: calc(var(--textarea-line-height) * var(--textarea-max-rows));
 }
 
 html, body {

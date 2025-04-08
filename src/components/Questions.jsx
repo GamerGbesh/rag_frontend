@@ -11,15 +11,18 @@ function Questions({question,
                        correctAnswer,
                        correct,
                        setCorrect,
+                       answered,
+                       setAnswered,
                    }) {
     const [chosen, setChosen] = useState(false)
 
     function onClick (num){
         setChosen(true)
         if (num === correctAnswer) setCorrect(correct + 1)
+        setAnswered(answered + 1)
     }
 
-    if (chosen) {
+    if (chosen || currentQuestion <= answered) {
         return (
             <div className={styles.questionSet}>
                 <p className={styles.question}>

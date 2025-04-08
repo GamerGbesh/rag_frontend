@@ -138,6 +138,12 @@ function Library() {
         )
     }
 
+    function chat (query) {
+        if (query.length === 0){
+            return
+        }
+        navigate("/chat", {state: {query: query, course_id: courseId, library_id: id}})
+    }
 
 
     return (
@@ -188,19 +194,9 @@ function Library() {
                     placeholder="Type your message..."
                     minRows={1}
                     maxRows={10}
-                    style={{
-                        padding: '50px',
-
-                        border: '1px solid #ccc',
-                        borderRadius: '20px',
-                        fontFamily: 'inherit',
-                        position: 'absolute',
-                        bottom: '75px',
-                        right: '14%',
-                        width: '66%',
-                        resize: 'none',
-                    }}
+                    handleClick={chat}
                 />
+
             </div> : (
                 !addLibrary && <p style={{
                     color:"red",

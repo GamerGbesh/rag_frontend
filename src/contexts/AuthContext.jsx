@@ -8,8 +8,6 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [status, setStatus] = useState(true);
     const [addLibrary, setAddLibrary] = useState(false);

@@ -17,6 +17,7 @@ function Quiz() {
     const [correctAnswer, setCorrectAnswer] = useState(null);
     const [done, setDone] = useState(false);
     const [correct, setCorrect] = useState(0);
+    const [answered, setAnswered] = useState(0);
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -90,6 +91,8 @@ function Quiz() {
                                onQuestionChange={onQuestionChange}
                                setCorrect={setCorrect}
                                correct={correct}
+                               answered={answered}
+                               setAnswered={setAnswered}
                     />
                 </>
             }

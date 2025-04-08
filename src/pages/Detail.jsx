@@ -11,7 +11,6 @@ import DeleteButton from "../components/DeleteButton.jsx";
 function Detail() {
     const location = useLocation();
     const id = location.state?.id
-    console.log(id)
     const [data, setData] = useState(null);
     const [update, setUpdate] = useState(false);
     const [loading, setLoading] = useState(true);

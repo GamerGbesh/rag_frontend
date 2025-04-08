@@ -9,6 +9,7 @@ import Library from "./pages/Library.jsx";
 import Detail from "./pages/Detail.jsx";
 import Logout from "./pages/Logout.jsx";
 import Quiz from "./pages/Quiz.jsx";
+import Chat from "./pages/Chat.jsx";
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
                     <Route path="/library" element={<Library/>}/>
                     <Route path="/library/details" element={<Detail/>}/>
                     <Route path="/quiz" element={<Quiz/>}/>
+                    <Route path="/chat" element={<Chat/>}/>
                 </Routes>
-
 
             </main>
 

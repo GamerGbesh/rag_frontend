@@ -1,10 +1,9 @@
 export function FirstPage() {
     return (
-        <>
-            <p>
-                You are seeing this page because you have not signed in.
-            </p>
-        </>
+        <div className="first-page">
+            <h1>Welcome to the Library App</h1>
+            <p>Please log in to continue</p>
+        </div>
     )
 }
 

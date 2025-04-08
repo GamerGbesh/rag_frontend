@@ -20,7 +20,7 @@ function NavBar() {
             <div className="navbar-links">
                 {user ? (<>
                         <Link to={"logout"}>Logout</Link>
-                        <div className="profile-pic"></div>
+                        {/*<div className="profile-pic"></div>*/}
                     </>
                 ) : (
                     <>

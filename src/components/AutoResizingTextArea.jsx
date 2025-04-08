@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styles from "../css/autoresizing.module.css"
+import styles from "../css/autoresizing.module.css";
 
 const AutoResizingTextarea = ({
                                   placeholder = 'Type here...',
@@ -11,52 +11,77 @@ const AutoResizingTextarea = ({
     const [value, setValue] = useState('');
     const textareaRef = useRef(null);
 
+    const resizeTextarea = () => {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+
+        textarea.style.height = 'auto';
+        const style = window.getComputedStyle(textarea);
+        const lineHeight = parseFloat(style.lineHeight);
+
+        const minHeight = lineHeight * minRows;
+        const maxHeight = lineHeight * maxRows;
+
+        textarea.style.height = `${Math.min(textarea.scrollHeight, maxHeight)}px`;
+        textarea.style.overflowY = textarea.scrollHeight > maxHeight ? 'auto' : 'hidden';
+    };
+
     useEffect(() => {
-        if (textareaRef.current) {
-            // Reset height to get accurate scrollHeight
-            textareaRef.current.style.height = 'auto';
-
-            // Calculate the required height
-            const scrollHeight = textareaRef.current.scrollHeight;
-            const rowHeight = parseInt(getComputedStyle(textareaRef.current).lineHeight, 10);
-            const minHeight = rowHeight * minRows;
-            const maxHeight = rowHeight * maxRows;
-
-            // Set the height
-            textareaRef.current.style.height = `${Math.min(
-                Math.max(scrollHeight, minHeight),
-                maxHeight
-            )}px`;
-        }
-    }, [value, minRows, maxRows]);
+        resizeTextarea();
+    }, [value]);
 
     const handleChange = (e) => {
         setValue(e.target.value);
-        if (props.onChange) {
-            props.onChange(e);
+        if (props.onChange) props.onChange(e);
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            if (e.ctrlKey || e.metaKey) {
+                // Insert newline manually
+                const start = textareaRef.current.selectionStart;
+                const end = textareaRef.current.selectionEnd;
+
+                const newValue =
+                    value.substring(0, start) + "\n" + value.substring(end);
+
+                setValue(newValue);
+
+                // Move the cursor after the new line
+                requestAnimationFrame(() => {
+                    textareaRef.current.selectionStart =
+                        textareaRef.current.selectionEnd = start + 1;
+                });
+
+                e.preventDefault(); // prevent default newline just in case
+            } else {
+                e.preventDefault();
+                handleClick?.(textareaRef.current.value);
+                setValue("")
+            }
         }
     };
 
+
     return (
-        <>
+        <div className={styles.textareaContainer}>
             <textarea
                 ref={textareaRef}
+                className={styles.textarea}
                 value={value}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 placeholder={placeholder}
-                style={{
-                    width: '100%',
-                    resize: 'none', // Disable user resizing
-                    overflow: 'hidden', // Hide scrollbar
-                    minHeight: `${parseInt(getComputedStyle(document.documentElement).lineHeight, 10) * minRows}px`,
-                    boxSizing: 'border-box', // Include padding in height calculation
-
-                    ...props.style,
-                }}
+                rows={minRows}
                 {...props}
             />
-            <button className={`submit ${styles.submit}`} onClick={handleClick} >↑</button>
-        </>
+            <button className={styles.submit} type="button" onClick={() => {
+                handleClick(textareaRef.current.value)
+                setValue("")
+            }}>
+                ↑
+            </button>
+        </div>
     );
 };
 
