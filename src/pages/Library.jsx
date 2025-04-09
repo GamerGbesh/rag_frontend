@@ -113,7 +113,12 @@ function Library() {
     }
 
     function onSubmit(questionNumber){
-        navigate("/quiz", {state: {document_id: document, library_id: id, number_of_questions: questionNumber}})
+        navigate("/quiz", {state: {
+            document_id: document,
+                library_id: id,
+                number_of_questions:
+                questionNumber,
+        }})
     }
 
 

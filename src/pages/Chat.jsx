@@ -16,6 +16,7 @@ function Chat() {
     const query = location.state?.query
     const course_id = location.state?.course_id
     const library_id = location.state?.library_id
+    const data = {header: "LLM", body:[{course_name: "LLaMA 3.2"}]}
 
     useEffect(() => {
 
@@ -30,8 +31,8 @@ function Chat() {
         if (query.length === 0){
             return
         }
-        if (start) setMessages([query])
-        else setMessages((prev) => [...prev, query])
+        if (start) setMessages([{content:query, role:"user"}])
+        else setMessages((prev) => [...prev, {content: query, role: "user"}])
         setLoading(true)
         api.get("question", {
             params: {
@@ -42,7 +43,7 @@ function Chat() {
         })
             .then((response) => {
                 console.log(response)
-                setMessages((prev) => [...prev, response.data.LLM_response])
+                setMessages((prev) => [...prev, {content:response.data.LLM_response, role:"chat"}])
             })
             .catch((error) => {console.log(error)})
             .finally(() => setLoading(false))
@@ -50,10 +51,10 @@ function Chat() {
 
     return (
         <>
-            <SideBar />
+            <SideBar data={data}/>
             <div className={styles.chat}>
                 {messages?.map((message, index) => (
-                    <Message response={message} key={index} user={index % 2 === 0 && true} />
+                    <Message response={message.content} key={index} user={message.role === "user"} />
                 ))}
                 {loading && <Loader/>}
             </div>
