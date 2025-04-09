@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
+import {useEffect,  useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import styles from "../css/chat.module.css"
 import Message from "../components/Message.jsx";
 import SideBar from "../components/SideBar.jsx";
 import AutoResizingTextarea from "../components/AutoResizingTextArea.jsx";
 import api from "../services/api.js";
+import Loader from "../components/Loader.jsx";
 
 
 function Chat() {
@@ -16,12 +17,13 @@ function Chat() {
     const course_id = location.state?.course_id
     const library_id = location.state?.library_id
 
-
     useEffect(() => {
 
         chat(query, true)
 
     }, [])
+
+
 
     async function chat(query, start=false){
         console.log("🚀 Calling chat with query:", query, "start:", start);
@@ -53,7 +55,9 @@ function Chat() {
                 {messages?.map((message, index) => (
                     <Message response={message} key={index} user={index % 2 === 0 && true} />
                 ))}
+                {loading && <Loader/>}
             </div>
+
             <AutoResizingTextarea
                 placeholder="Type your message..."
                 minRows={1}

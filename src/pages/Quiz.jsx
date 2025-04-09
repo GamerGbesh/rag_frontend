@@ -3,7 +3,6 @@ import styles from "../css/quiz.module.css"
 import {useEffect, useState} from "react";
 import api from "../services/api.js";
 import {useLocation, useNavigate} from "react-router-dom";
-import popup from "../components/Popup.jsx";
 import Popup from "../components/Popup.jsx";
 
 function Quiz() {
@@ -18,7 +17,6 @@ function Quiz() {
     const [done, setDone] = useState(false);
     const [correct, setCorrect] = useState(0);
     const [answered, setAnswered] = useState(0);
-    const navigate = useNavigate();
 
     const location = useLocation();
     const document_id = location.state.document_id;
