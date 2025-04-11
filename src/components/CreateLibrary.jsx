@@ -1,5 +1,5 @@
 import {useState} from "react";
-import "../css/signup.css"
+import styles from "../css/signup.module.css"
 import api from "../services/api.js";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 
@@ -15,12 +15,12 @@ function CreateLibrary() {
         e.preventDefault();
         if (toggle){
             await api.post("createLibrary", {library_name:library, library_description:description, entry_key:entryKey})
-                .then(result => {setError(null); setAddLibrary(!addLibrary);})
+                .then(() => {setError(null); setAddLibrary(!addLibrary);})
                 .catch(err => {setError(err.response.data.library_name)});
             setStatus(!status)
         } else {
             await api.post("joinLibrary", {library_name:library, entry_key:entryKey})
-                .then(result => {setError(null); setAddLibrary(!addLibrary);})
+                .then(() => {setError(null); setAddLibrary(!addLibrary);})
                 .catch(err => {setError(err.response.data.detail || err.response.data.message)});
             setStatus(!status)
         }
@@ -36,24 +36,24 @@ function CreateLibrary() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div className={"toggle"}>
+                <div className={styles.toggle}>
                     <button
-                        className={toggle ? "toggle-btn" : undefined}
+                        className={toggle ? styles.toggleBtn : undefined}
                         onClick={switcher}
                     >
                         Create Library
                     </button>
                     <button
-                        className={!toggle ? "toggle-btn" : undefined}
+                        className={!toggle ? styles.toggleBtn : undefined}
                         onClick={switcher}
                     >
                         Join Library
                     </button>
                 </div>
                 {toggle ? <h2>Create Library</h2> : <h2>Join Library</h2>}
-                {error && <div className="alert alert-danger">{error}</div>}
+                {error && <div className={styles.alert}>{error}</div>}
 
-                <div className="form-group">
+                <div className={styles.formGroup}>
                     <input
                         type="text"
                         placeholder="Library Name"
@@ -73,7 +73,7 @@ function CreateLibrary() {
                         onChange={(e) => setEntryKey(e.target.value)}
                     />
                 </div>
-                <button type="submit" className={"submit"}>Submit</button>
+                <button type="submit" className={styles.submit}>Submit</button>
             </form>
         </>
     )

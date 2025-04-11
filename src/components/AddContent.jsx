@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 import api from "../services/api.js";
-import "../css/mobile.css"
+import styles from "../css/signup.module.css"
 
 
 export function AddContent({course_id, library_id, activeFunction}) {
@@ -26,10 +26,10 @@ export function AddContent({course_id, library_id, activeFunction}) {
         await api.post("Documents", formData, {headers: {
             "Content-Type": "multipart/form-data",
         },})
-            .then(async result => {
+            .then(async () => {
                 setError(null);
                 await activeFunction(course_id)
-                    .then((data) => {setContent(!content);})
+                    .then(() => {setContent(!content);})
                     .catch((error) => {console.log(error)});
 
             })
@@ -44,9 +44,9 @@ export function AddContent({course_id, library_id, activeFunction}) {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="form-document">
+            <form onSubmit={handleSubmit} >
                 <h2>Upload Document</h2>
-                {error && <div className="alert alert-danger">{error}</div>}
+                {error && <div className={styles.alert}>{error}</div>}
                 <span>Accepted: docx, pdf, pptx, txt, jpeg, jpg, png</span>
                 <div style={{
                     border: "1px solid grey",
@@ -58,7 +58,10 @@ export function AddContent({course_id, library_id, activeFunction}) {
                 }}>
                     <input type="file" required onChange={handleChange} style={{ width: "100%" }} />
                 </div>
-                {!loading ? <button type={"submit"} className={"submit"} >Submit</button> : <p>Uploading document....</p>}
+                {!loading ? <button type={"submit"}
+                                    className={styles.submit} >
+                                        Submit
+                            </button> : <p>Uploading document....</p>}
             </form>
         </>
     )

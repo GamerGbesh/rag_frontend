@@ -1,4 +1,4 @@
-.content-card {
+.contentCard {
     background: var(--light-color);
     padding: 1.25rem;
     margin: 0.75rem 0;
@@ -11,19 +11,19 @@
 .colored {
     background: #a9acb6;
 }
-.content-card:hover {
+.contentCard:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.content-name {
+.contentName {
     font-size: 1.125rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--secondary-color);
 }
 
-.content-card .btn-group {
+.contentCard .btnGroup {
     color: #666;
     display: flex;
     font-size: 0.9rem;
@@ -35,11 +35,8 @@
     gap: 1rem;
 }
 
-.content-card:hover .btn-group {
+.contentCard:hover .btnGroup {
     visibility: visible;
 }
 
-.btn-group .content-btn{
-
-}
 

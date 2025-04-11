@@ -1,4 +1,4 @@
-import "../css/sidebar.css"
+import styles from "../css/sidebar.module.css"
 import {useEffect, useState} from "react";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 import {Link} from "react-router-dom";
@@ -30,12 +30,12 @@ function SideBar({data, addFunction, activeFunction}) {
 
     return (<>
         { user &&
-        <div className={`sidebar ${sidebarOpen ? "active" : ""}`}>
+        <div className={`${styles.sidebar} ${sidebarOpen ? styles.active : ""}`}>
             {loading ? (
                 <p>Loading...</p>
             ) : (
                 <>
-                    <div className="side-header">
+                    <div className={styles.sideHeader}>
                         {data?.header.library_name || data?.header}{data?.header_active &&
                             <>
                                  <br/> {!data?.creator ?
@@ -49,7 +49,7 @@ function SideBar({data, addFunction, activeFunction}) {
                         }
                     </div>
 
-                    <div className="side-body">{
+                    <div className={styles.sideBody}>{
                         <>
                             <>
                                 {data?.user && <SideCard activeFunction={activeFunction} item={data?.user}/>}
@@ -66,7 +66,7 @@ function SideBar({data, addFunction, activeFunction}) {
                         </>
                     }
 
-                        {data?.active && <div className="add-more">
+                        {data?.active && <div className={styles.addMore}>
                             <button onClick={addFunction} className={"submit"}>
                                 +
                             </button>

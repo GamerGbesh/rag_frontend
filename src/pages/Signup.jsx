@@ -1,5 +1,5 @@
-import {Link, useNavigate} from "react-router-dom";
-import "../css/signup.css"
+import {Link} from "react-router-dom";
+import styles from "../css/signup.module.css"
 import {useState} from "react";
 import api from "../services/api";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
@@ -10,7 +10,6 @@ function Signup() {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [password2, setPassword2] = useState("");
-    const navigate = useNavigate();
     const {login} = useAuthContext();
 
     const handleSubmit = async (e) => {
@@ -56,15 +55,27 @@ function Signup() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                {error && <div className="alert alert-danger">{error}</div>}
+                {error && <div className={styles.alert}>{error}</div>}
 
                 <div className="form-group">
-                <input type="text" placeholder="Username" name={"username"} required onChange={(e) => setUsername(e.target.value)} />
-                <input type="email" placeholder={"Email"} name={"email"} required onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" name={"password1"} required onChange={(e) => setPassword(e.target.value)} />
-                <input type="password" placeholder="Verify Password" name={"password2"} required onChange={(e) => setPassword2(e.target.value)} />
+                <input type="text"
+                       placeholder="Username"
+                       name={"username"} required
+                       onChange={(e) => setUsername(e.target.value)} />
+                <input type="email"
+                       placeholder={"Email"}
+                       name={"email"} required
+                       onChange={(e) => setEmail(e.target.value)} />
+                <input type="password"
+                       placeholder="Password"
+                       name={"password1"} required
+                       onChange={(e) => setPassword(e.target.value)} />
+                <input type="password"
+                       placeholder="Verify Password"
+                       name={"password2"} required
+                       onChange={(e) => setPassword2(e.target.value)} />
                 </div>
-                <button type="submit" className={"submit"}>Submit</button>
+                <button type="submit" className={styles.submit}>Submit</button>
             </form>
             <span>Already have an account? <Link to={"/login"}>Login</Link></span>
         </>

@@ -14,7 +14,7 @@
     box-shadow: var(--shadow-sm);
 }
 
-.navbar-brand a {
+.navbarBrand a {
     color: var(--light-color);
     font-size: 1.5rem;
     text-decoration: none;
@@ -22,17 +22,17 @@
     transition: var(--transition);
 }
 
-.navbar-brand a:hover {
+.navbarBrand a:hover {
     opacity: 0.9;
 }
 
-.navbar-links {
+.navbarLinks {
     display: flex;
     gap: 1.5rem;
     align-items: center;
 }
 
-.navbar-links a {
+.navbarLinks a {
     color: var(--light-color);
     text-decoration: none;
     font-weight: 600;
@@ -41,25 +41,6 @@
     border-radius: var(--border-radius-sm);
 }
 
-.navbar-links a:hover {
+.navbarLinks a:hover {
     background: rgba(255, 255, 255, 0.2);
-}
-
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    background: var(--light-color);
-    border-radius: 50%;
-    border: 2px solid var(--light-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.profile-pic img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }

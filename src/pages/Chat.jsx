@@ -1,5 +1,5 @@
 import {useEffect,  useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import styles from "../css/chat.module.css"
 import Message from "../components/Message.jsx";
 import SideBar from "../components/SideBar.jsx";
@@ -10,7 +10,6 @@ import Loader from "../components/Loader.jsx";
 
 function Chat() {
     const [messages, setMessages] = useState([])
-    const navigate = useNavigate()
     const location = useLocation()
     const [loading, setLoading] = useState(true);
     const query = location.state?.query

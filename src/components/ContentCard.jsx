@@ -1,4 +1,4 @@
-import "../css/contentcard.css"
+import styles from "../css/contentcard.module.css"
 
 function ContentCard({
                          content,
@@ -13,22 +13,22 @@ function ContentCard({
     if (quiz){
         const fileUrl = baseUrl + content.file
         return (
-            <div className={"content-card"}>
+            <div className={styles.contentCard}>
                 <a href={fileUrl} key={content.id}
-                   className={"content-name"}
+                   className={styles.contentName}
                    download>
                     {content.file.split("/")[content.file.split("/").length - 1].slice(0, 65)}
                 </a>
 
-                <div className="btn-group">
+                <div className={styles.btnGroup}>
                     <button
-                        className={"content-btn"}
+                        className={styles.contentBtn}
                         onClick={() => makeFunction(content.id)}
                     >
                         Generate quiz
                     </button>
                     {permission && <button
-                        className={"content-btn"}
+                        className={styles.contentBtn}
                         onClick={() => deleteFunction(content.id)}
                     >
                         🗑️
@@ -40,20 +40,20 @@ function ContentCard({
     }
 
     return (
-        <div className={`content-card ${content.is_admin ? "colored" : ""}`}>
-            <span key={content.user.id} className={"content-name"}>{content.user.username}</span>
+        <div className={`${styles.contentCard} ${content.is_admin ? styles.colored : ""}`}>
+            <span key={content.user.id} className={styles.contentName}>{content.user.username}</span>
 
             <div className="btn-group">
 
                 {creator && content.is_admin ?
                     <button
-                        className={"content-btn"}
+                        className={styles.contentBtn}
                         onClick={() => removeFunction(content.user.id)}
                     >
                         Demote admin
                     </button>
                 : creator && <button
-                    className={"content-btn"}
+                    className={styles.contentBtn}
                     onClick={() => makeFunction(content.user.id)}
                 >
                     Make admin
@@ -61,7 +61,7 @@ function ContentCard({
 
                 {creator &&
                     <button
-                        className={"content-btn"}
+                        className={styles.contentBtn}
                         onClick={() => deleteFunction(content.user.id)}
                     >
                         🗑️

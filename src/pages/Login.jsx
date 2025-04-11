@@ -1,5 +1,5 @@
-import {Link, useNavigate} from "react-router-dom";
-import "../css/signup.css"
+import {Link} from "react-router-dom";
+import styles from "../css/signup.module.css"
 import {useState} from "react";
 import api from "../services/api.js";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
@@ -8,8 +8,7 @@ function Login() {
     const [error, setError] = useState(null);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
-    const {login} = useAuthContext();
+     const {login} = useAuthContext();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -44,14 +43,20 @@ function Login() {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                {error && <div className="alert alert-danger">{error}</div>}
+                {error && <div className={styles.alert}>{error}</div>}
 
-                <div className="form-group">
-                    <input type="text" placeholder="Username" name={"username"} required onChange={(e) => setUsername(e.target.value)} />
-                    <input type="password" placeholder="Password" name={"password1"} required onChange={(e) => setPassword(e.target.value)} />
+                <div className={styles.formGroup}>
+                    <input type="text"
+                           placeholder="Username"
+                           name={"username"} required
+                           onChange={(e) => setUsername(e.target.value)} />
+                    <input type="password"
+                           placeholder="Password"
+                           name={"password1"} required
+                           onChange={(e) => setPassword(e.target.value)} />
 
                 </div>
-                <button type="submit" className={"submit"}>Submit</button>
+                <button type="submit" className={styles.submit}>Submit</button>
             </form>
             <span>Don't have an account? <Link to={"/signup"}>Signup</Link></span>
         </>
