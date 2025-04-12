@@ -4,8 +4,10 @@ import {useEffect, useState} from "react";
 import api from "../services/api.js";
 import FirstPage from "../components/FirstPage.jsx";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
-import ContentCard from "../components/ContentCard.jsx";
+import MemberCard from "../components/MemberCard.jsx";
 import DeleteButton from "../components/DeleteButton.jsx";
+import Loader from "../components/Loader.jsx";
+import ConfirmPopup from "../components/ConfirmPopup.jsx";
 
 
 function Detail() {
@@ -14,8 +16,9 @@ function Detail() {
     const [data, setData] = useState(null);
     const [update, setUpdate] = useState(false);
     const [loading, setLoading] = useState(true);
-    const {user, personal} = useAuthContext()
+    const {user, personal, setRecent} = useAuthContext()
     const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -93,21 +96,41 @@ function Detail() {
             .catch(err => console.log(err))
     }
 
+
+    async function onClick (e){
+        e.preventDefault();
+        if (e.target.value === "No"){
+            setShowPopup(false)
+        }
+        else{
+            if (data.creator){
+                setRecent(null)
+                await deleteLibrary()
+            }
+            else {
+                setRecent(null)
+                await leaveLibrary()
+            }
+        }
+    }
+
     return (
         <>
             <SideBar data={data} />
             {personal !== id &&
                 <>
+                    {showPopup && data?.creator && <ConfirmPopup text={"Do you want to delete this library"} onClick={onClick}/>}
+                    {showPopup && !data?.creator && <ConfirmPopup text={"Do you want to leave this library"} onClick={onClick}/>}
                     {data?.creator ?
-                        <DeleteButton customFunction={deleteLibrary}/>
+                        <DeleteButton onShowPopup={setShowPopup}/>
                         :
-                        <DeleteButton message={"Leave Library"} customFunction={leaveLibrary}/>}
+                        <DeleteButton message={"Leave Library"} onShowPopup={setShowPopup}/>}
                 </>
             }
             <div className="content-area">
                 {data?.members.length > 0 ? (
                     data?.members.map((member, index) => (
-                        <ContentCard content={member} key={index}
+                        <MemberCard content={member} key={index}
                                      makeFunction={makeFunction}
                                      deleteFunction={deleteFunction}
                                      removeFunction={removeFunction}
@@ -118,7 +141,7 @@ function Detail() {
                         {!loading && <p>There are no members in this library</p>}
                     </>
                     )}
-                {loading && <p>Loading...</p>}
+                {loading && <Loader text={"Loading..."} />}
             </div>
         </>
     )

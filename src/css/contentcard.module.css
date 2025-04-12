@@ -1,42 +1,153 @@
-.contentCard {
+/* Base Card Styles */
+.card {
     background: var(--light-color);
     padding: 1.25rem;
     margin: 0.75rem 0;
     border-radius: var(--border-radius-md);
     box-shadow: var(--shadow-md);
-    transition: var(--transition);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Content Card Specific */
+.contentCard {
+    composes: card;
     border-left: 4px solid var(--primary-color);
+}
+
+/* Member Card Specific */
+.memberCard {
+    composes: card;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Shared States */
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .colored {
     background: #a9acb6;
 }
-.contentCard:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
 
-.contentName {
+/* Shared Elements */
+.cardName {
     font-size: 1.125rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--secondary-color);
+    flex-grow: 1;
 }
 
-.contentCard .btnGroup {
+.btnGroup {
     color: #666;
     display: flex;
     font-size: 0.9rem;
     line-height: 1.5;
-    position : absolute;
-    left: 80%;
-    bottom: 1.2rem;
-    visibility: hidden;
     gap: 1rem;
 }
 
-.contentCard:hover .btnGroup {
-    visibility: visible;
+/* Content Card Button Positioning */
+.contentCard .btnGroup {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
+.contentCard:hover .btnGroup {
+    opacity: 1;
+}
 
+/* Member Card Button Positioning */
+.memberCard .btnGroup {
+    margin-left: auto;
+}
+
+/* Button Styles */
+.actionBtn,
+.contentBtn {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.actionBtn:hover,
+.contentBtn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .card {
+        padding: 1rem;
+    }
+
+    .cardName {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .contentCard .btnGroup {
+        position: static;
+        opacity: 1;
+        justify-content: flex-end;
+        margin-top: 0.75rem;
+    }
+
+    .memberCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .memberCard .btnGroup {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* Add these styles to your existing CSS */
+.cardName {
+    /* Keep existing styles */
+    display: flex;
+    overflow: hidden;
+    width: calc(100% - 120px); /* Account for button group width */
+}
+
+.fileNameText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+}
+
+/* Adjust button group positioning */
+.contentCard .btnGroup {
+    /* Keep existing styles */
+    width: auto; /* Don't let buttons wrap */
+    min-width: 120px; /* Ensure enough space for buttons */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .cardName {
+        width: 100%; /* Full width on mobile */
+    }
+
+    .contentCard .btnGroup {
+        width: 100%;
+        justify-content: flex-start; /* Better mobile layout */
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+    }
+}

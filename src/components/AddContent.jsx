@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useAuthContext} from "../contexts/AuthContext.jsx";
 import api from "../services/api.js";
 import styles from "../css/signup.module.css"
+import Loader from "./Loader.jsx";
 
 
 export function AddContent({course_id, library_id, activeFunction}) {
@@ -61,7 +62,7 @@ export function AddContent({course_id, library_id, activeFunction}) {
                 {!loading ? <button type={"submit"}
                                     className={styles.submit} >
                                         Submit
-                            </button> : <p>Uploading document....</p>}
+                            </button> : <Loader text={"Uploading Document..."} />}
             </form>
         </>
     )

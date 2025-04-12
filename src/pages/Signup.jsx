@@ -57,7 +57,7 @@ function Signup() {
             <form onSubmit={handleSubmit}>
                 {error && <div className={styles.alert}>{error}</div>}
 
-                <div className="form-group">
+                <div className={styles.formGroup}>
                 <input type="text"
                        placeholder="Username"
                        name={"username"} required

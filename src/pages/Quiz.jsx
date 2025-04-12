@@ -1,14 +1,14 @@
 import Questions from "../components/Questions.jsx";
-import styles from "../css/quiz.module.css"
 import {useEffect, useState} from "react";
 import api from "../services/api.js";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Popup from "../components/Popup.jsx";
+import Loader from "../components/Loader.jsx";
 
 function Quiz() {
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const [question, setQuestion] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [answers, setAnswers] = useState([]);
@@ -22,30 +22,33 @@ function Quiz() {
     const document_id = location.state.document_id;
     const number_of_questions = location.state.number_of_questions;
     const library_id = location.state.library_id;
+    const quizTitle = location.state?.title
 
     useEffect(() => {
         const fetchQuestions = async () => {
             setLoading(true);
-            const response = api.get("/quiz", {
+            api.get("/quiz", {
                 params: {
                     document_id: document_id,
                     number_of_questions: number_of_questions,
                     library_id:library_id,
-            }
-        })
+                }
+            })
                 .then((res) => {
                     setQuestions(res.data);
                     setCurrentQuestion(1);
+                    setError(false);
+                    setLoading(false)
                     console.log(res.data);
                 })
-            .catch((err) => {
-                console.log(err);
-            })
-                .finally(() => {setLoading(false);});
-    }
-    fetchQuestions();
+                .catch((err) => {
+                    console.log(err);
+                    setError(true);
+                    fetchQuestions();
+                })
+        }
+        fetchQuestions();
     }, []);
-
 
 
     useEffect(() => {
@@ -72,28 +75,41 @@ function Quiz() {
         else setCurrentQuestion(question);
     }
 
-
     return (
-        <div className={styles.container}>
+        <div className="w-full min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4 sm:px-6 overflow-y-auto">
             {loading ? (
-             <p>Generating questions...</p>
-            ):
+                    <Loader text={"Generating Questions..."} />
+            ) : (
                 <>
-                    {done && <Popup count={number_of_questions}  correct={correct} library_id={library_id} />}
-                    <Questions question={question}
-                               answers={answers}
-                               explanation={explanation}
-                               currentQuestion={currentQuestion}
-                               totalQuestions={number_of_questions}
-                               correctAnswer={correctAnswer}
-                               onQuestionChange={onQuestionChange}
-                               setCorrect={setCorrect}
-                               correct={correct}
-                               answered={answered}
-                               setAnswered={setAnswered}
+                    {done && <Popup count={number_of_questions} correct={correct} library_id={library_id} />}
+
+                    {error ? "Refresh the page if it's taking too long or wait patiently!" : (
+                        <>
+                    <div className="w-full max-w-4xl mb-6 text-center">
+                        <h1 className="text-2xl sm:text-3xl font-bold py-4 text-gray-800 mb-2 flex items-center relative bottom-2/4">
+                            {quizTitle || "Quiz Time"}
+                        </h1>
+
+                    </div>
+
+                    <Questions
+                        question={question}
+                        answers={answers}
+                        explanation={explanation}
+                        currentQuestion={currentQuestion}
+                        totalQuestions={number_of_questions}
+                        correctAnswer={correctAnswer}
+                        onQuestionChange={onQuestionChange}
+                        setCorrect={setCorrect}
+                        correct={correct}
+                        answered={answered}
+                        setAnswered={setAnswered}
                     />
                 </>
-            }
+                )}
+
+                </>
+            )}
         </div>
     )
 }

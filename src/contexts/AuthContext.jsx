@@ -12,8 +12,9 @@ export const AuthProvider = ({ children }) => {
     const [status, setStatus] = useState(true);
     const [addLibrary, setAddLibrary] = useState(false);
     const [content, setContent] = useState(true);
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
     const [personal, setPersonal] = useState(null);
+    const [recent, setRecent] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem("access_token");
@@ -21,6 +22,10 @@ export const AuthProvider = ({ children }) => {
             setUser(token);
         }
     }, [])
+
+    useEffect(() => {
+        setRecent(null);
+    }, [user]);
 
     const login = (data) => {
         localStorage.setItem("access_token", data.access);
@@ -37,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{user, login, logout, status, setStatus,
+        <AuthContext.Provider value={{user, login, logout, status, setStatus, recent, setRecent,
             addLibrary, setAddLibrary, content, setContent, sidebarOpen, setSidebarOpen, personal, setPersonal}}>
             {children}
         </AuthContext.Provider>

@@ -74,6 +74,11 @@ function CreateLibrary() {
                     />
                 </div>
                 <button type="submit" className={styles.submit}>Submit</button>
+                <button onClick={() => setAddLibrary(!addLibrary)} className="bg-blue-500 text-white border-none
+              rounded-full w-10 h-10 text-xl cursor-pointer transition-all m-4 relative left-[40%]
+              inline-flex items-center justify-center hover:bg-blue-600 hover:scale-110">
+                    X
+                </button>
             </form>
         </>
     )

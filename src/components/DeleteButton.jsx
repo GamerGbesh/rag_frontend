@@ -1,12 +1,14 @@
-import styles from "../css/deletebutton.module.css"
-
-function DeleteButton({message="Delete Library", customFunction, id}) {
+function DeleteButton({ message = "Delete Library", onShowPopup}) {
     return (
-        <>
-            {id ? <button className={styles.button} onClick={() => customFunction(id)}>{message}</button>
-            : <button className={styles.button} onClick={customFunction}>{message}</button>}
-        </>
-    )
+        <button
+            className="absolute right-8 border-none
+            w-32 h-12 bg-red-700 hover:bg-red-600
+            rounded-lg cursor-pointer text-white transition-colors duration-200 z-50"
+            onClick={() => onShowPopup(true)}
+        >
+            {message}
+        </button>
+    );
 }
 
 export default DeleteButton;

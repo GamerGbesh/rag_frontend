@@ -7,15 +7,17 @@ import FirstPage from "../components/FirstPage.jsx";
 import CreateLibrary from "../components/CreateLibrary.jsx";
 import "../css/home.css"
 import "../css/mobile.css"
+import Dashboard from "../components/Dashboard.jsx";
 
 export function Home() {
     const navigate = useNavigate();
     const [data, setData] = useState(null);
-    const {user, status, setAddLibrary, addLibrary, setPersonal} = useAuthContext()
+    const {user, status, setAddLibrary, addLibrary, setSidebarOpen, setRecent} = useAuthContext()
 
     useEffect(() => {
         const setting = () => {
             setAddLibrary(false)
+            setSidebarOpen(false)
         }
         setting();
     }, []);
@@ -25,8 +27,6 @@ export function Home() {
             try {
                 const response = await api.get("/Libraries");
                 setData(response.data);
-
-
             }
             catch (error) {
                 console.log(error);
@@ -35,28 +35,23 @@ export function Home() {
         fetchData();
     }, [status])
 
-    const addFunction = (e) =>{
-        setAddLibrary(!addLibrary);
-        if (addLibrary) {
-            e.target.innerHTML = "+";
-        }
-        else {
-            e.target.innerHTML = "X"
-        }
 
-    }
-    const activeFunction = (index) => {
-        navigate("/Library", {state: {id: index}});
+    const activeFunction = (library) => {
+        setRecent(library)
+        navigate("/Library", {state: {id: library.id}});
     }
 
     return (
         <>
-            <SideBar data={data} activeFunction={activeFunction} addFunction={addFunction} />
+            <SideBar data={data} activeFunction={activeFunction}/>
             {!user ? (
                 <FirstPage/>
             ):(
                 <>
-                    {addLibrary && <CreateLibrary/>}
+                    {addLibrary ? <CreateLibrary/> : <Dashboard
+                        data={data}
+                        activeFunction={activeFunction}
+                        />}
                 </>
             )}
         </>

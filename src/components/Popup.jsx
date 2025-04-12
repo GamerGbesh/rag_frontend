@@ -20,7 +20,7 @@ function Popup({ onSubmit, correct, count, library_id }) {
         onSubmit(questionCount);
     };
 
-    if (correct) {
+    if (count) {
         return (
             <div className={styles.popupOverlay}>
                 <form className={styles.popup} >
