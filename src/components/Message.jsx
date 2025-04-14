@@ -1,4 +1,3 @@
-import styles from "../css/message.module.css"
 import { marked } from "marked"
 import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
@@ -14,7 +13,11 @@ function Message({ response, user }) {
     }, [response]);
 
     return (
-        <div className={`${styles.messageBox} ${user ? styles.user : styles.ai}`}>
+        <div className={`p-3 rounded-xl max-w-[70%] w-fit mb-3 break-words relative
+        ${user ?
+            'bg-teal-100 ml-auto rounded-br-none' :
+            'bg-gray-100 mr-auto rounded-bl-none'
+        }`}>
             <span dangerouslySetInnerHTML={{ __html: processedHtml }} />
         </div>
     );

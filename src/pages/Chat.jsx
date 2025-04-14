@@ -1,8 +1,6 @@
 import {useEffect,  useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
-import styles from "../css/chat.module.css"
+import {useLocation} from "react-router-dom";
 import Message from "../components/Message.jsx";
-import SideBar from "../components/SideBar.jsx";
 import AutoResizingTextarea from "../components/AutoResizingTextArea.jsx";
 import api from "../services/api.js";
 import Loader from "../components/Loader.jsx";
@@ -10,7 +8,6 @@ import Loader from "../components/Loader.jsx";
 
 function Chat() {
     const [messages, setMessages] = useState([])
-    const navigate = useNavigate()
     const location = useLocation()
     const [loading, setLoading] = useState(true);
     const query = location.state?.query
@@ -51,21 +48,31 @@ function Chat() {
 
     return (
         <>
-            <SideBar data={data}/>
-            <div className={styles.chat}>
-                {messages?.map((message, index) => (
-                    <Message response={message.content} key={index} user={message.role === "user"} />
-                ))}
-                {loading && <Loader/>}
+            <div className="flex flex-col h-screen">
+
+                <div className="flex-1 overflow-y-auto p-4 pb-70">
+                    {messages?.map((message, index) => (
+                        <Message
+                            response={message.content}
+                            key={index}
+                            user={message.role === "user"}
+                        />
+                    ))}
+                    {loading && (
+                        <div className="flex justify-center p-4">
+                            <Loader />
+                        </div>
+                    )}
+                </div>
+
+
+                    <AutoResizingTextarea
+                        placeholder="Type your message..."
+                        minRows={1}
+                        maxRows={5}
+                        handleClick={chat}
+                    />
             </div>
-
-            <AutoResizingTextarea
-                placeholder="Type your message..."
-                minRows={1}
-                maxRows={10}
-                handleClick={chat}
-            />
-
         </>
     )
 }

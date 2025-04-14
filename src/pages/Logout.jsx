@@ -13,7 +13,7 @@ function Logout() {
                 .then(r => console.log(r))
                 .catch(e => console.log(e));
 
-            navigate("/login");
+            navigate("/");
         }
         logout_user();
         logout()

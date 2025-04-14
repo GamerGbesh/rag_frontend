@@ -63,16 +63,12 @@ function Questions({question,
                     </p>
                 ))}
             </div>
-            {/*<span>Click and hold the empty space below to see the explanation</span>*/}
-            {/*<div className={styles.explanation}>*/}
-            {/*    <span>{explanation}</span>*/}
-            {/*</div>*/}
-            {/*<Pagination*/}
-            {/*    currentQuestion={currentQuestion}*/}
-            {/*    totalQuestions={totalQuestions}*/}
-            {/*    onQuestionChange={onQuestionChange}*/}
-            {/*    setChosen={setChosen}*/}
-            {/*/>*/}
+            <Pagination
+                currentQuestion={currentQuestion}
+                totalQuestions={totalQuestions}
+                onQuestionChange={onQuestionChange}
+                setChosen={setChosen}
+            />
         </div>
     )
 }

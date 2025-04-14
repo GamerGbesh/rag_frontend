@@ -13,32 +13,8 @@
         height: calc(100vh - 60px);
     }
 
-    /* Navbar */
-    .navbar {
-        height: 60px;
-        padding: 0 1rem;
-        width: 100%;
-    }
 
-    .navbar-brand a {
-        font-size: 1.2rem;
-    }
 
-    .navbar-links {
-        gap: 0.5rem;
-    }
-
-    .navbar-links a {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.9rem;
-    }
-
-    .profile-pic {
-        width: 32px;
-        height: 32px;
-    }
-
-    /* Sidebar - already has mobile styles */
 
     /* Content area */
     .content-area {

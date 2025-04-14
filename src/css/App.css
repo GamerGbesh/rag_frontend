@@ -15,7 +15,7 @@
   --danger-light: #f8d7da;
 
   --white: #ffffff;
-  --light-color: #FFFFFF;
+  --light-color: #fdfcfc;
   --light-bg: #f8f9fa;
 
   --dark-color: #242424;
@@ -60,7 +60,6 @@
 
 html, body {
   height: 100%;
-  overflow: hidden; /* No scrolling on the page */
 }
 
 /* App.css */
@@ -74,7 +73,7 @@ html, body {
 }
 
 .main-content {
-  margin-left: 330px;
+  margin-left: 230px;
   margin-top: 70px;
   padding: 2rem;
   display: flex;
@@ -82,6 +81,20 @@ html, body {
   align-items: center;
   position: relative;
   height: calc(100vh - 70px); /* Full height minus header */
-  overflow: hidden; /* Prevents page from scrolling */
 }
 
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -20px) scale(1.05); }
+  50% { transform: translate(0, 20px) scale(0.95); }
+  75% { transform: translate(-20px, -10px) scale(1.03); }
+}
+.animate-blob {
+  animation: blob 7s infinite ease-in-out;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}

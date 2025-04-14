@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer components {
+    /* Form Container */
+    form {
+        @apply w-full max-w-[400px] mx-auto my-8 p-8 bg-white shadow-md rounded-lg;
+        @apply md:right-[10%]; /* Responsive positioning */
+    }
+
+    /* Form Group */
+    .formGroup {
+        @apply flex flex-col w-full mb-4 ;
+    }
+
+    /* Input Fields */
+    .formGroup input {
+        @apply w-full p-3 my-2 border border-gray-300 rounded text-base transition-all;
+        @apply focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200;
+    }
+
+    /* Submit Button */
+    .submit {
+        @apply w-full p-3 mt-4 bg-blue-500 text-white border-none rounded font-semibold cursor-pointer transition-all;
+        @apply hover:bg-blue-600;
+        @apply md:p-3 md:text-base; /* Responsive sizing */
+    }
+
+    /* Toggle Container */
+    .toggle {
+        @apply flex mb-4 rounded overflow-hidden;
+    }
+
+    /* Toggle Buttons */
+    .toggleBtn {
+        @apply flex-1 p-3 border-none bg-gray-100 cursor-pointer transition-all font-semibold;
+        @apply hover:bg-gray-200;
+        @apply md:p-3; /* Responsive sizing */
+    }
+
+    /* First Toggle Button */
+    .toggle button:first-child {
+        @apply border-r border-gray-300;
+    }
+
+    /* Active Toggle Button */
+    .toggle button.active {
+        @apply bg-blue-500 text-white;
+    }
+
+    /* Alert Message */
+    .alert {
+        @apply text-red-500;
+    }
+
+    span a {
+        @apply text-blue-800;
+    }
+}

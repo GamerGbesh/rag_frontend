@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import NavBar from './components/NavBar'
 import './css/App.css'
 import Home from "./pages/Home.jsx";
@@ -28,9 +27,7 @@ function App() {
                     <Route path="/quiz" element={<Quiz/>}/>
                     <Route path="/chat" element={<Chat/>}/>
                 </Routes>
-
             </main>
-
         </>
      )
 }
