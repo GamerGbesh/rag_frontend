@@ -68,7 +68,7 @@ const AutoResizingTextarea = ({
         ref={textareaRef}
         className="flex-1 min-h-[48px] max-h-[120px] p-3 border border-gray-300 rounded-xl
                 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent
-                resize-none transition-all text-base md:max-h-[15em] md:rounded-2xl"
+                resize-none transition-all text-base md:max-h-[15em] md:rounded-2xl bg-white"
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}

@@ -16,7 +16,7 @@ function Detail() {
     const [data, setData] = useState(null);
     const [update, setUpdate] = useState(false);
     const [loading, setLoading] = useState(true);
-    const {user, personal, setRecent} = useAuthContext()
+    const {user, personal} = useAuthContext()
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
 
@@ -51,7 +51,10 @@ function Detail() {
             user_id
         })
             .then(res => {console.log(res); setUpdate(!update);})
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                alert(err.response.data.error)
+            })
     }
 
     async function deleteFunction(user_id) {
@@ -104,11 +107,9 @@ function Detail() {
         }
         else{
             if (data.creator){
-                setRecent(null)
                 await deleteLibrary()
             }
             else {
-                setRecent(null)
                 await leaveLibrary()
             }
         }
@@ -127,7 +128,10 @@ function Detail() {
                         <DeleteButton message={"Leave Library"} onShowPopup={setShowPopup}/>}
                 </>
             }
-            <div className="content-area">
+            <div>
+                {data?.members.length > 0 &&
+                    <p className={"dark:text-white text-2xl italic font-bold"}>Members</p>
+                }
                 {data?.members.length > 0 ? (
                     data?.members.map((member, index) => (
                         <MemberCard content={member} key={index}
@@ -138,7 +142,11 @@ function Detail() {
                     ))
                 ):(
                     <>
-                        {!loading && <p>There are no members in this library</p>}
+                        {!loading && (
+                            <p className="text-gray-600 dark:text-gray-300 text-center">
+                                There are no members in this library
+                            </p>
+                        )}
                     </>
                     )}
                 {loading && <Loader text={"Loading..."} />}

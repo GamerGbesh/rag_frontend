@@ -2,7 +2,7 @@
   /* Color Palette */
   --primary-color: #4485c6;
   --primary-dark: #357ABD;
-  --primary-light: #e1f0fa;
+  --primary-light: #f6f6f6;
   --primary-transparent: rgba(68, 133, 198, 0.2);
 
   --secondary-color: #2C3E50;
@@ -60,6 +60,7 @@
 
 html, body {
   height: 100%;
+  overflow-y: hidden;
 }
 
 /* App.css */
@@ -73,7 +74,7 @@ html, body {
 }
 
 .main-content {
-  margin-left: 230px;
+  /*margin-left: 230px;*/
   margin-top: 70px;
   padding: 2rem;
   display: flex;

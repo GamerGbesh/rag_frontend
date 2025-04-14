@@ -76,7 +76,7 @@ function Quiz() {
     }
 
     return (
-        <div className="w-full min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4 sm:px-6 overflow-y-auto">
+        <div className="w-full min-h-screen  flex flex-col items-center py-8 px-4 sm:px-6 overflow-y-auto">
             {loading ? (
                     <Loader text={"Generating Questions..."} />
             ) : (
@@ -86,7 +86,7 @@ function Quiz() {
                     {error ? "Refresh the page if it's taking too long or wait patiently!" : (
                         <>
                     <div className="w-full max-w-4xl mb-6 text-center">
-                        <h1 className="text-2xl sm:text-3xl font-bold py-4 text-gray-800 mb-2 flex items-center relative bottom-2/4">
+                        <h1 className="text-2xl sm:text-3xl font-bold py-4 dark:text-white text-gray-800 mb-2 flex items-center relative bottom-2/4">
                             {quizTitle || "Quiz Time"}
                         </h1>
 

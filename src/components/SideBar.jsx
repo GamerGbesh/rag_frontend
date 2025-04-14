@@ -5,7 +5,7 @@ import SideCard from "./SideCard.jsx";
 import Loader from "./Loader.jsx";
 
 
-function SideBar({data, activeFunction}) {
+function SideBar({data, activeFunction, disabled}) {
     const [loading, setLoading] = useState(true);
     const {user, sidebarOpen, setPersonal, setSidebarOpen, setAddLibrary, addLibrary} = useAuthContext()
     const [active, setActive] = useState(null);
@@ -68,7 +68,7 @@ function SideBar({data, activeFunction}) {
                                         <br/> {!data?.creator ?
                                         <Link to={"/library/details"}
                                               state={{id:data?.header.id}}
-                                              className="text-blue-600"
+                                              className="dark:text-blue-600 text-blue-600"
                                         >Details</Link>
                                         : data?.sub_header && <span
                                         style={{"fontSize":"14px", "fontStyle":"italic"}}
@@ -89,18 +89,17 @@ function SideBar({data, activeFunction}) {
                                                       index={index}
                                                       setActive={setActive}
                                                       active={active}
-                                                      id={item.id}
                                             />
                                         ))}
                                     </>
                                 </div>
 
                                 {data?.active && <div className="my-4 text-center">
-                                    <button ref={buttonRef} onClick={() => setAddLibrary(!addLibrary)} className="bg-blue-500 text-white border-none
+                                    {!disabled && <button ref={buttonRef} onClick={() => setAddLibrary(!addLibrary)} className="bg-blue-500 text-white border-none
               rounded-full w-10 h-10 text-xl cursor-pointer transition-all
               inline-flex items-center justify-center hover:bg-blue-600 hover:scale-110">
                                         +
-                                    </button>
+                                    </button>}
                                 </div>}
                             </>
                         )}

@@ -58,7 +58,7 @@ function Login() {
                 </div>
                 <button type="submit" className={styles.submit}>Submit</button>
             </form>
-            <span>Don't have an account? <Link to={"/signup"}>Signup</Link></span>
+            <span className={"dark:text-white"}>Don't have an account? <Link to={"/signup"}>Signup</Link></span>
         </>
     )
 }

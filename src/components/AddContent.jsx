@@ -11,11 +11,19 @@ export function AddContent({course_id, library_id, activeFunction}) {
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const MAX_FILE_SIZE = 7;
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         if (!file) {
             setError("Please upload a file");
+            setLoading(false);
+            return;
+        }
+
+        const fileSize = file.size / (1024 * 1024);
+        if (fileSize > MAX_FILE_SIZE){
+            alert(`File size is too large. Maximum allowed size is ${MAX_FILE_SIZE}MB`)
             setLoading(false);
             return;
         }
@@ -29,7 +37,7 @@ export function AddContent({course_id, library_id, activeFunction}) {
         },})
             .then(async () => {
                 setError(null);
-                await activeFunction(course_id)
+                await activeFunction(course_id, true)
                     .then(() => {setContent(!content);})
                     .catch((error) => {console.log(error)});
 
@@ -49,6 +57,7 @@ export function AddContent({course_id, library_id, activeFunction}) {
                 <h2>Upload Document</h2>
                 {error && <div className={styles.alert}>{error}</div>}
                 <span>Accepted: docx, pdf, pptx, txt, jpeg, jpg, png</span>
+                <p className={"text-red-400 text-right"}>Max File Size: {MAX_FILE_SIZE}MB</p>
                 <div style={{
                     border: "1px solid grey",
                     padding: "10px",

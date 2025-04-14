@@ -13,13 +13,16 @@ function Message({ response, user }) {
     }, [response]);
 
     return (
-        <div className={`p-3 rounded-xl max-w-[70%] w-fit mb-3 break-words relative
-        ${user ?
-            'bg-teal-100 ml-auto rounded-br-none' :
-            'bg-gray-100 mr-auto rounded-bl-none'
-        }`}>
+        <div
+            className={`p-3 rounded-xl max-w-[70%] w-fit mb-3 break-words relative shadow
+    ${user
+                ? 'bg-blue-600 text-white ml-auto rounded-br-none'
+                : 'bg-gray-200 text-black mr-auto rounded-bl-none'
+            }`}
+        >
             <span dangerouslySetInnerHTML={{ __html: processedHtml }} />
         </div>
+
     );
 }
 

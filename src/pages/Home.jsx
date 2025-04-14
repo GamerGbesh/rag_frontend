@@ -12,7 +12,8 @@ import Dashboard from "../components/Dashboard.jsx";
 export function Home() {
     const navigate = useNavigate();
     const [data, setData] = useState(null);
-    const {user, status, setAddLibrary, addLibrary, setSidebarOpen, setRecent} = useAuthContext()
+    const [libraryCount, setLibraryCount] = useState(0);
+    const { user, status, setAddLibrary, addLibrary, setSidebarOpen } = useAuthContext()
 
     useEffect(() => {
         const setting = () => {
@@ -24,26 +25,25 @@ export function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await api.get("/Libraries");
-                setData(response.data);
-            }
-            catch (error) {
-                console.log(error);
-            }
+
+                await api.get("/Libraries").then((response) => {
+                    setData(response.data);
+                    setLibraryCount(response.data.body.length + 1)
+                })
+                    .catch ((error) => console.log(error))
+
         }
         fetchData();
     }, [status])
 
 
     const activeFunction = (library) => {
-        setRecent(library)
         navigate("/Library", {state: {id: library.id}});
     }
 
     return (
         <>
-            <SideBar data={data} activeFunction={activeFunction}/>
+            <SideBar data={data} activeFunction={activeFunction} disabled={libraryCount >= 3} />
             {!user ? (
                 <FirstPage/>
             ):(
@@ -51,6 +51,7 @@ export function Home() {
                     {addLibrary ? <CreateLibrary/> : <Dashboard
                         data={data}
                         activeFunction={activeFunction}
+                        disabled={libraryCount >= 3}
                         />}
                 </>
             )}

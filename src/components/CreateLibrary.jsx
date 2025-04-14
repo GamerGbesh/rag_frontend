@@ -16,12 +16,12 @@ function CreateLibrary() {
         if (toggle){
             await api.post("createLibrary", {library_name:library, library_description:description, entry_key:entryKey})
                 .then(() => {setError(null); setAddLibrary(!addLibrary);})
-                .catch(err => {setError(err.response.data.library_name)});
+                .catch(err => {setError(err.response.data.library_name || err.response.data.error)});
             setStatus(!status)
         } else {
             await api.post("joinLibrary", {library_name:library, entry_key:entryKey})
                 .then(() => {setError(null); setAddLibrary(!addLibrary);})
-                .catch(err => {setError(err.response.data.detail || err.response.data.message)});
+                .catch(err => {setError(err.response.data.detail || err.response.data.message || err.response.data.error)});
             setStatus(!status)
         }
     }

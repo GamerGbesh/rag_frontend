@@ -13,7 +13,6 @@ function Chat() {
     const query = location.state?.query
     const course_id = location.state?.course_id
     const library_id = location.state?.library_id
-    const data = {header: "LLM", body:[{course_name: "LLaMA 3.2"}]}
 
     useEffect(() => {
 
@@ -71,6 +70,7 @@ function Chat() {
                         minRows={1}
                         maxRows={5}
                         handleClick={chat}
+                        disabled={loading}
                     />
             </div>
         </>

@@ -7,7 +7,7 @@ function SideCard({item, id, index, activeFunction, active, setActive}) {
         px-4 py-3 bg-white/10 rounded-md cursor-pointer transition-all hover:bg-white/20 
         hover:translate-x-1  active:font-semibold`}
            key={index} onClick={() => {
-            activeFunction(id || item);
+            activeFunction(item);
             setActive(index)
         }}
         >

@@ -36,7 +36,7 @@ export function FirstPage() {
                     </a>
                     <a
                         href="/signup"
-                        className="px-6 py-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all"
+                        className="px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-600 hover:bg-blue-50 font-medium rounded-lg transition-all"
                     >
                         Create Account
                     </a>
