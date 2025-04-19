@@ -44,8 +44,8 @@ function Quiz() {
                 .catch((err) => {
                     console.log(err);
                     setError(true);
-                    fetchQuestions();
                 })
+                .finally(() => setLoading(false));
         }
         fetchQuestions();
     }, []);
@@ -83,7 +83,7 @@ function Quiz() {
                 <>
                     {done && <Popup count={number_of_questions} correct={correct} library_id={library_id} />}
 
-                    {error ? "Refresh the page if it's taking too long or wait patiently!" : (
+                    {error ? <p className={"dark:text-white font-bold text-3xl"}>"Something went wrong! Refresh the page!"</p> : (
                         <>
                     <div className="w-full max-w-4xl mb-6 text-center">
                         <h1 className="text-2xl sm:text-3xl font-bold py-4 dark:text-white text-gray-800 mb-2 flex items-center relative bottom-2/4">

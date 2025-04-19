@@ -2,7 +2,7 @@ import styles from "../css/popup.module.css"
 import { useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
 
-function Popup({ onSubmit, correct, count, library_id }) {
+function Popup({ onSubmit, correct, count, library_id, setShowPopup }) {
     const [questionCount, setQuestionCount] = useState(5);
     const navigate = useNavigate();
     useEffect(() => {
@@ -43,6 +43,7 @@ function Popup({ onSubmit, correct, count, library_id }) {
         <div className={styles.popupOverlay}>
             <form className={styles.popup} onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
+
                     <p>How many questions (min:5, max:10)</p>
                     <input
                         type="number"
@@ -55,9 +56,16 @@ function Popup({ onSubmit, correct, count, library_id }) {
                         required
                     />
                 </div>
-                <button type="submit" className={styles.submitBtn}>
-                    Done
-                </button>
+                <div className={"flex gap-2.5"}>
+                    <button type="submit" className={styles.submitBtn}>
+                        Done
+                    </button>
+                    <button className={"border-2 p-3 rounded-3xl bg-red-400 cursor-pointer"}
+                    onClick={(e)=>{
+                        e.preventDefault();
+                        setShowPopup(null)
+                    }}>X</button>
+                </div>
             </form>
         </div>
     );

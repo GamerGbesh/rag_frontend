@@ -285,7 +285,7 @@ function Library() {
                     {showPopup && <ConfirmPopup onClick={onClick}/>}
                     {coursePopup && <ConfirmPopup text={"Do you want to delete this document"} onClick={onCourseClick}/>}
                     {data?.active && <DeleteButton message={"Delete Course"} onShowPopup={setShowPopup}/>}
-                    {document && <Popup onSubmit={onSubmit}/>}
+                    {document && <Popup onSubmit={onSubmit} setShowPopup={setDocument}/>}
                     <div className="content-area">
                         {!content ?
                         courseData?.data?.map((docs) => (
